@@ -19,10 +19,6 @@ return new class extends Migration
             $table->string('category');
             $table->integer('inventory_id');
             $table->timestamps();
-            $table->foreign('inventory_id')
-                ->references('id')
-                ->on('inventory')
-                ->onDelete('cascade');
         });
     }
 

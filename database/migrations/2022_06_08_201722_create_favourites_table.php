@@ -17,14 +17,6 @@ return new class extends Migration
             $table->integer('users_id');
             $table->integer('products_id');
             $table->timestamps();
-            $table->foreign('users_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
-            $table->foreign('products_id')
-                ->references('id')
-                ->on('products')
-                ->onDelete('cascade');
         });
     }
 

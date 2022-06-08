@@ -26,14 +26,6 @@ return new class extends Migration
             $table->integer('cities_id');
             $table->rememberToken();
             $table->timestamps();
-            $table->foreign('users_type_id')
-                ->references('id')
-                ->on('users_type')
-                ->onDelete('cascade');
-            $table->foreign('cities_id')
-                ->references('id')
-                ->on('cities')
-                ->onDelete('cascade');
         });
     }
 
