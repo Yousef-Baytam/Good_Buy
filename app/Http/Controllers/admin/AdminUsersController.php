@@ -12,19 +12,22 @@ class AdminUsersController extends Controller
     {
         $users = User::all();
 
+        foreach ($users as $i) {
+            $i->city = User::find($i->id)->cities;
+        }
         return response()->json([
             "status" => "Success",
-            "restos" => $users
+            "res" => $users
         ], 200);
     }
 
     public function suspendUser($id)
     {
-        $users = User::all();
+        $users = User::find($id)->update(['status' => 'suspended']);
 
         return response()->json([
             "status" => "Success",
-            "restos" => $users
+            "res" => $users
         ], 200);
     }
 
