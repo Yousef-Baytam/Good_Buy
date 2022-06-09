@@ -10,7 +10,7 @@ use App\Models\Category;
 
 class AdminProductsController extends Controller
 {
-    public function addProduct(Request $request)
+    public function addProduct(Request $request) //form data??
     {
         Product::create([
             'product_name' => $request->product_name,
@@ -24,15 +24,14 @@ class AdminProductsController extends Controller
         ], 200);
     }
 
-    public function updateProduct($id = null, Request $request)
+    public function updateProduct(Request $request, $id = null) //url encoded?
     {
         Product::find($id)
             ->update([
                 'product_name' => $request->product_name,
                 'price' => $request->price,
-                'phone' => $request->phone,
-                'inventory_id' => Inventory::where('inventory_status', $request->inventory)->id,
-                'categories_id' => Category::where('category', $request->category)->id
+                'inventory_id' => Inventory::where('inventory_status', $request->inventory)->get()[0]->id,
+                'categories_id' => Category::where('category', $request->category)->get()[0]->id
             ]);
 
         return response()->json([
@@ -42,13 +41,10 @@ class AdminProductsController extends Controller
 
     public function deleteProduct($id = null)
     {
-        if (Product::find($id)->delete())
-            return response()->json([
-                "status" => "Success",
-            ], 200);
+        Product::find($id)->delete();
 
         return response()->json([
-            "status" => "Product not found",
-        ], 404);
+            "status" => "Success",
+        ], 200);
     }
 }

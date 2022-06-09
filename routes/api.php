@@ -36,13 +36,13 @@ Route::group(['prefix' => 'v1'], function () {
             Route::group(['prefix' => 'products'], function () {
                 Route::get('/{id?}', [ProductsController::class, 'getProduct']);
                 Route::post('/add', [AdminProductsController::class, 'addProduct']);
-                Route::patch('/update/{id}', [AdminUsersController::class, 'updateProduct']);
-                Route::delete('/delete/{id}', [AdminUsersController::class, 'deleteProduct']);
+                Route::patch('/update/{id}', [AdminProductsController::class, 'updateProduct']);
+                Route::delete('/delete/{id}', [AdminProductsController::class, 'deleteProduct']);
             });
             Route::group(['prefix' => 'users'], function () {
-                Route::get('/', [AdminProductsController::class, 'getAllUsers']);
-                Route::post('/suspend/{id}', [AdminProductsController::class, 'suspendUser']);
-                Route::post('/activate/{id}', [AdminProductsController::class, 'activateUser']);
+                Route::get('/', [AdminUsersController::class, 'getAllUsers']);
+                Route::post('/suspend/{id}', [AdminUsersController::class, 'suspendUser']);
+                Route::post('/activate/{id}', [AdminUsersController::class, 'activateUser']);
             });
         });
     });
