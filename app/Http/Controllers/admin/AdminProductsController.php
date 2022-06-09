@@ -17,19 +17,21 @@ class AdminProductsController extends Controller
             'inventory_id' => Inventory::where('inventory_status', $request->inventory)->id,
             'categories_id' => Category::where('category', $request->category)->id
         ]);
+
+        return response()->json([
+            "status" => "Success",
+        ], 200);
     }
 
     public function updateProduct($id = null, Request $request)
     {
-        $product = Product::find($id);
         Product::find($id)
             ->update([
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'email' => $request->email,
+                'product_name' => $request->product_name,
+                'price' => $request->price,
                 'phone' => $request->phone,
-                'city_id' => $city_id,
-                'dob' => $request->dob
+                'inventory_id' => Inventory::where('inventory_status', $request->inventory)->id,
+                'categories_id' => Category::where('category', $request->category)->id
             ]);
 
         return response()->json([
@@ -39,5 +41,13 @@ class AdminProductsController extends Controller
 
     public function deleteProduct($id = null)
     {
+        if (Product::find($id)->delete())
+            return response()->json([
+                "status" => "Success",
+            ], 200);
+
+        return response()->json([
+            "status" => "Product not found",
+        ], 404);
     }
 }
