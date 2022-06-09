@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminUsersController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\FavouritesController;
 use App\Http\Controllers\ProductsController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('login', 'login');
     Route::post('register', 'register');
     Route::post('logout', 'logout');
+    Route::post('me', 'me');
     Route::post('refresh', 'refresh');
 });
 
@@ -51,7 +53,6 @@ Route::group(['prefix' => 'v1'], function () {
                 Route::get('/favourite', [FavouritesController::class, 'favouriteProduct']);
             });
             Route::group(['prefix' => 'users'], function () {
-                Route::get('/{id}', [UsersController::class, 'getUser']);
                 Route::patch('/update', [UsersController::class, 'updateUser']);
             });
         });
