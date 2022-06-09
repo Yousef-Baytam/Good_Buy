@@ -12,8 +12,7 @@ class UsersController extends Controller
 {
     public function updateUser(Request $request)
     {
-        $id = Auth::user()->id;
-        User::find($id)
+        User::find(Auth::user()->id)
             ->update([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
