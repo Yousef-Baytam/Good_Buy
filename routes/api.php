@@ -33,16 +33,18 @@ Route::group(['prefix' => 'v1'], function () {
 
     Route::group(['prefix' => 'admin'], function () {
         Route::group(['middleware' => 'auth:api'], function () {
-            Route::group(['prefix' => 'products'], function () {
-                Route::get('/{id?}', [ProductsController::class, 'getProduct']);
-                Route::post('/add', [AdminProductsController::class, 'addProduct']);
-                Route::patch('/update/{id}', [AdminProductsController::class, 'updateProduct']);
-                Route::delete('/delete/{id}', [AdminProductsController::class, 'deleteProduct']);
-            });
-            Route::group(['prefix' => 'users'], function () {
-                Route::get('/', [AdminUsersController::class, 'getAllUsers']);
-                Route::post('/suspend/{id}', [AdminUsersController::class, 'suspendUser']);
-                Route::post('/activate/{id}', [AdminUsersController::class, 'activateUser']);
+            Route::group(['middleware' => 'isAdmin'], function () {
+                Route::group(['prefix' => 'products'], function () {
+                    Route::get('/{id?}', [ProductsController::class, 'getProduct']);
+                    Route::post('/add', [AdminProductsController::class, 'addProduct']);
+                    Route::patch('/update/{id}', [AdminProductsController::class, 'updateProduct']);
+                    Route::delete('/delete/{id}', [AdminProductsController::class, 'deleteProduct']);
+                });
+                Route::group(['prefix' => 'users'], function () {
+                    Route::get('/', [AdminUsersController::class, 'getAllUsers']);
+                    Route::post('/suspend/{id}', [AdminUsersController::class, 'suspendUser']);
+                    Route::post('/activate/{id}', [AdminUsersController::class, 'activateUser']);
+                });
             });
         });
     });
