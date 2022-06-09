@@ -50,7 +50,9 @@ Route::group(['prefix' => 'v1'], function () {
         Route::group(['middleware' => 'auth:api'], function () {
             Route::group(['prefix' => 'products'], function () {
                 Route::get('/{id?}', [ProductsController::class, 'getProduct']);
-                Route::get('/favourite/{id}', [FavouritesController::class, 'favouriteProduct']);
+                Route::get('/favourite', [FavouritesController::class, 'getFavouriteProduct']);
+                Route::post('/favourite/add/{id}', [FavouritesController::class, 'favouriteProduct']);
+                Route::post('/favourite/remove/{id}', [FavouritesController::class, 'unfavouriteProduct']);
             });
             Route::group(['prefix' => 'users'], function () {
                 Route::patch('/update', [UsersController::class, 'updateUser']);
