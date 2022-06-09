@@ -69,13 +69,18 @@ class User extends Authenticatable implements JWTSubject
 
     protected $table = 'users';
 
-    public function city()
+    public function cities()
     {
         return $this->belongsTo(City::class, 'cities_id', 'id');
     }
 
-    public function user_type()
+    public function users_type()
     {
         return $this->belongsTo(User_type::class, 'users_type_id', 'id');
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
     }
 }

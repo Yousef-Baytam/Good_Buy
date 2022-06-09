@@ -11,7 +11,7 @@ class City extends Model
 
     protected $table = 'cities';
 
-    public function user()
+    public function users()
     {
         return $this->hasMany(User::class, 'cities_id', 'id');
     }
