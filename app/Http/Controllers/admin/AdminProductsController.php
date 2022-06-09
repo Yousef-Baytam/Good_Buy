@@ -15,8 +15,8 @@ class AdminProductsController extends Controller
         Product::create([
             'product_name' => $request->product_name,
             'price' => $request->price,
-            'inventory_id' => Inventory::where('inventory_status', $request->inventory)->id,
-            'categories_id' => Category::where('category', $request->category)->id
+            'inventory_id' => Inventory::where('inventory_status', $request->inventory)->get()[0]->id,
+            'categories_id' => Category::where('category', $request->category)->get()[0]->id
         ]);
 
         return response()->json([
