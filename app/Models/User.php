@@ -71,11 +71,11 @@ class User extends Authenticatable implements JWTSubject
 
     public function city()
     {
-        return $this->hasOne(City::class);
+        return $this->belongsTo(City::class, 'cities_id', 'id');
     }
 
     public function user_type()
     {
-        return $this->belongsTo(User_type::class);
+        return $this->belongsTo(User_type::class, 'users_type_id', 'id');
     }
 }
