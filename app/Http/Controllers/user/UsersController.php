@@ -19,7 +19,7 @@ class UsersController extends Controller
                 'last_name' => $request->last_name,
                 'email' => $request->email,
                 'phone' => $request->phone,
-                'city_id' => City::where('city_name', $request->city)->id
+                'city_id' => City::where('city_name', $request->city)->get()[0]->id
             ]);
 
         return response()->json([
