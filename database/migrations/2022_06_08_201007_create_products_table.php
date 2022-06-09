@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('product_name');
             $table->integer('inventory_id');
+            $table->integer('categories_id');
             $table->timestamps();
         });
     }
