@@ -24,6 +24,8 @@ class User extends Authenticatable implements JWTSubject
         'email',
         'password',
         'status',
+        'users_type_id',
+        'cities_id',
     ];
 
     /**
@@ -64,6 +66,8 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    protected $table = 'users';
 
     public function city()
     {
