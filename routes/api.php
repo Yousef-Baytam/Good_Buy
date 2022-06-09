@@ -36,8 +36,8 @@ Route::group(['prefix' => 'v1'], function () {
             Route::group(['prefix' => 'products'], function () {
                 Route::get('/{id?}', [ProductsController::class, 'getProduct']);
                 Route::post('/add', [AdminProductsController::class, 'addProduct']);
-                Route::patch('/update', [AdminUsersController::class, 'updateProduct']);
-                Route::delete('/delete', [AdminUsersController::class, 'deleteProduct']);
+                Route::patch('/update/{id}', [AdminUsersController::class, 'updateProduct']);
+                Route::delete('/delete/{id}', [AdminUsersController::class, 'deleteProduct']);
             });
             Route::group(['prefix' => 'users'], function () {
                 Route::get('/', [AdminProductsController::class, 'getAllUsers']);
@@ -50,7 +50,7 @@ Route::group(['prefix' => 'v1'], function () {
         Route::group(['middleware' => 'auth:api'], function () {
             Route::group(['prefix' => 'products'], function () {
                 Route::get('/{id?}', [ProductsController::class, 'getProduct']);
-                Route::get('/favourite', [FavouritesController::class, 'favouriteProduct']);
+                Route::get('/favourite/{id}', [FavouritesController::class, 'favouriteProduct']);
             });
             Route::group(['prefix' => 'users'], function () {
                 Route::patch('/update', [UsersController::class, 'updateUser']);
