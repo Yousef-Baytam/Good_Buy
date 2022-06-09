@@ -3,10 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\City;
 
 class UsersController extends Controller
 {
-    public function updateUser()
+    public function updateUser(Request $request)
     {
+        $id = Auth::user()->id;
+        User::find($id)
+            ->update([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'city_id' => City::where('city_name', $request->city)->id
+            ]);
+
+        return response()->json([
+            "status" => "Success",
+        ], 200);
     }
 }
