@@ -3,8 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AdminProductsController;
-use App\Http\Controllers\AdminUsersController;
+use App\Http\Controllers\admin\AdminProductsController;
+use App\Http\Controllers\admin\AdminUsersController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\FavouritesController;
 use App\Http\Controllers\ProductsController;
