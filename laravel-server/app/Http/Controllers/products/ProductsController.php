@@ -15,6 +15,9 @@ class ProductsController extends Controller
         } else {
             $products = Product::all();
         }
+        if ($products)
+            foreach ($products as $product)
+                $product->category = Product::find($product->id)->categories;
 
         return response()->json([
             "status" => "Success",
