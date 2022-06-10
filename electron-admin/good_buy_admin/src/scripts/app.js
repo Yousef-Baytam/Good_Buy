@@ -1,6 +1,11 @@
 const axios = require('axios')
 
 window.addEventListener('DOMContentLoaded', () => {
+    const userBtn = document.querySelector('#userBtn')
+    const productBtn = document.querySelector('#productBtn')
+    const categoryBtn = document.querySelector('#categoryBtn')
+
+
     if (window.location.href.includes('index.html'))
         document.querySelector('#login-form').addEventListener('submit', async (e) => {
             e.preventDefault()
@@ -44,6 +49,22 @@ window.addEventListener('DOMContentLoaded', () => {
 
     if (!window.location.href.includes('index'))
         adminPage()
+
+    userBtn.addEventListener('click', () => {
+        if (!document.querySelector('iframe').attributes.src.textContent.includes('user')) {
+            document.querySelector('iframe').attributes.src.textContent = './views/users.html'
+            require('./userCards')()
+        }
+    })
+    productBtn.addEventListener('click', () => {
+        if (!document.querySelector('iframe').attributes.src.textContent.includes('products'))
+            document.querySelector('iframe').attributes.src.textContent = './views/products.html'
+    })
+    categoryBtn.addEventListener('click', () => {
+        if (!document.querySelector('iframe').attributes.src.textContent.includes('products'))
+            document.querySelector('iframe').attributes.src.textContent = './views/categories.html'
+    })
+
 
     if (document.querySelector('iframe'))
         if (document.querySelector('iframe').attributes.src.textContent.includes('user'))
