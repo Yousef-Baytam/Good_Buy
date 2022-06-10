@@ -33,5 +33,11 @@ class AdminUsersController extends Controller
 
     public function activateUser($id)
     {
+        $users = User::find($id)->update(['status' => 'active']);
+
+        return response()->json([
+            "status" => "Success",
+            "res" => $users
+        ], 200);
     }
 }
