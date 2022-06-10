@@ -13,7 +13,7 @@ const createWindow = () => {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, './scripts/app.js')
+      preload: path.join(__dirname, './scripts/app.js'),
     }
   });
 
