@@ -22,6 +22,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('status');
+            $table->text('profile_pic')->nullable();
             $table->integer('users_type_id');
             $table->integer('cities_id');
             $table->rememberToken();

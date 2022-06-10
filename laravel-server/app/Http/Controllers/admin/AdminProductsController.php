@@ -15,6 +15,7 @@ class AdminProductsController extends Controller
         Product::create([
             'product_name' => $request->product_name,
             'price' => $request->price,
+            'image' => $request->image,
             'inventory_id' => Inventory::where('inventory_status', $request->inventory)->get()[0]->id,
             'categories_id' => Category::where('category', $request->category)->get()[0]->id
         ]);
@@ -30,6 +31,7 @@ class AdminProductsController extends Controller
             ->update([
                 'product_name' => $request->product_name,
                 'price' => $request->price,
+                'image' => $request->image,
                 'inventory_id' => Inventory::where('inventory_status', $request->inventory)->get()[0]->id,
                 'categories_id' => Category::where('category', $request->category)->get()[0]->id
             ]);

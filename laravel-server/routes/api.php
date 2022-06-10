@@ -65,6 +65,7 @@ Route::group(['prefix' => 'v1'], function () {
             });
             Route::group(['prefix' => 'users'], function () {
                 Route::patch('/update', [UsersController::class, 'updateUser']);
+                Route::patch('/update/image', [UsersController::class, 'updateImage']);
             });
         });
     });

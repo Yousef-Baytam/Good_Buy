@@ -25,4 +25,16 @@ class UsersController extends Controller
             "status" => "Success",
         ], 200);
     }
+
+    public function updateImage(Request $request)
+    {
+        User::find(Auth::user()->id)
+            ->update([
+                'profile_pic' => $request->profile_pic,
+            ]);
+
+        return response()->json([
+            "status" => "Success",
+        ], 200);
+    }
 }
