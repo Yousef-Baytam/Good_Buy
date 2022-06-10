@@ -3,11 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <title>Hello World!</title>
-    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="./styles/index.css" />
   </head>
   <body>
-    <h1>💖 Hello World!</h1>
-    <p>Welcome to your Electron application.</p>
+    <div>
+      <h1>Admin Login</h1>
+    </div>
+    <div class="form-container">
+      <form action="" id="login-form">
+        <div>
+          <label for="email">User Email</label>
+          <input type="email" placeholder="Email" id="email">
+        </div>
+        <div>
+          <label class="password-label" for="Password">User Password</label>
+          <input type="password" placeholder="Password" id="password">
+        </div>
+        <div>
+          <input type="submit" name="submit" id="submit">
+        </div>
+      </form>
+    </div>
     <script src="/src/app.js/app.js"></script>
   </body>
 </html>
