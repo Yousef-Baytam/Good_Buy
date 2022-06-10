@@ -40,6 +40,12 @@ Route::group(['prefix' => 'v1'], function () {
                     Route::patch('/update/{id}', [AdminProductsController::class, 'updateProduct']);
                     Route::delete('/delete/{id}', [AdminProductsController::class, 'deleteProduct']);
                 });
+                Route::group(['prefix' => 'categories'], function () {
+                    Route::get('/{id?}', [ProductsController::class, 'getCategory']);
+                    Route::post('/add', [AdminProductsController::class, 'addCategory']);
+                    Route::patch('/update/{id}', [AdminProductsController::class, 'updateCategory']);
+                    Route::delete('/delete/{id}', [AdminProductsController::class, 'deleteCategory']);
+                });
                 Route::group(['prefix' => 'users'], function () {
                     Route::get('/', [AdminUsersController::class, 'getAllUsers']);
                     Route::post('/suspend/{id}', [AdminUsersController::class, 'suspendUser']);
