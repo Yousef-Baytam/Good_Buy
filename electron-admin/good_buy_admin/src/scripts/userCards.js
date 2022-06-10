@@ -18,12 +18,12 @@ module.exports = (arr) => {
             console.log(err)
         })
 
-    const userCard = (name, email, phone, id, status) => {
+    const userCard = (name, email, phone, profile_pic, id, status) => {
         return `<div class="card-container">
             <div class="card">
                 <div class="details">
                     <div class="img">
-                        <img src="../assets/blank-profile.webp" alt="">
+                        <img src="${ profile_pic ? profile_pic : '../assets/blank-profile.webp' }" alt="">
                     </div>
                     <div class="info">
                         <div id='user_name'>Name: ${ name }</div>
@@ -87,7 +87,7 @@ module.exports = (arr) => {
         let container = document.querySelector('#iframe').contentDocument.querySelector('.subview')
         container.innerHTML = ``
         for (let user of users) {
-            let element = userCard(`${ user.first_name } ${ user.last_name }`, user.email, user.phone, user.id, user.status)
+            let element = userCard(`${ user.first_name } ${ user.last_name }`, user.email, user.phone, user.profile_pic, user.id, user.status)
             container.insertAdjacentHTML('beforeend', element)
             ban(user.id)
         }
