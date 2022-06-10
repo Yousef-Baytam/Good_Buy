@@ -139,3 +139,13 @@ iframe {
 i {
   cursor: pointer;
 }
+
+.prod-cat-body {
+  margin: 0;
+  justify-content: flex-start;
+}
+
+.prod-cat-container {
+  width: calc(100% - 4em);
+  height: fit-content;
+}

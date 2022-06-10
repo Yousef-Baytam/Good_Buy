@@ -4,14 +4,56 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./styles/index.css" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css"
             integrity="sha384-/frq1SRXYH/bSyou/HUp/hib7RVN1TawQYja658FEOodR/FQBKVqT9Ol+Oz3Olq5" crossorigin="anonymous">
+        <link rel="stylesheet" href="../styles/index.css">
         <title>Document</title>
     </head>
-    <body>
-        <body class="subview">
-            <script src="../scripts/app.js"></script>
-        </body>
+    <body class="prod-cat-body">
+        <div class="controls">
+            <div class="add-container">
+                <div>Add Product</div>
+                <div>
+                    <input type="text" placeholder="Search">
+                </div>
+            </div>
+        </div>
+        <div class="subview prod-cat-container">
+            <div class="card-container">
+                <div class="card">
+                    <div class="details">
+                        <div class="img">
+                            <img src="../assets/blank-profile.webp" alt="">
+                        </div>
+                        <div class="info">
+                            <div id='user_name'>Name: ${ name }</div>
+                            <div id='user_email'>Email: ${ email }</div>
+                            <div id='user_phone'>Phone: ${ phone }</div>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-ban ${ status == 'active' ? '' : 'fa-check' } U${ id }" id='${ id }'></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-container">
+                <div class="card">
+                    <div class="details">
+                        <div class="img">
+                            <img src="../assets/blank-profile.webp" alt="">
+                        </div>
+                        <div class="info">
+                            <div id='user_name'>Name: ${ name }</div>
+                            <div id='user_email'>Email: ${ email }</div>
+                            <div id='user_phone'>Phone: ${ phone }</div>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="fa-solid fa-ban ${ status == 'active' ? '' : 'fa-check' } U${ id }" id='${ id }'></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="../scripts/app.js"></script>
     </body>
 </html>
