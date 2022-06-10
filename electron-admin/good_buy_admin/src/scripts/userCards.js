@@ -1,6 +1,6 @@
 const axios = require('axios')
 
-module.exports = (arr) => {
+module.exports = () => {
     let users
     let token
     if (localStorage.getItem('token'))

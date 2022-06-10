@@ -57,8 +57,10 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     })
     productBtn.addEventListener('click', () => {
-        if (!document.querySelector('iframe').attributes.src.textContent.includes('products'))
+        if (!document.querySelector('iframe').attributes.src.textContent.includes('products')) {
             document.querySelector('iframe').attributes.src.textContent = './views/products.html'
+            require('./productCards')()
+        }
     })
     categoryBtn.addEventListener('click', () => {
         if (!document.querySelector('iframe').attributes.src.textContent.includes('products'))
