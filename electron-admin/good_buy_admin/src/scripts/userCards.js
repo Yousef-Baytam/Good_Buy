@@ -18,7 +18,7 @@ module.exports = (arr) => {
             console.log(err)
         })
 
-    const userCard = (name, email, phone, id) => {
+    const userCard = (name, email, phone, id, status) => {
         return `<div class="card-container">
             <div class="card">
                 <div class="details">
@@ -32,31 +32,64 @@ module.exports = (arr) => {
                     </div>
                 </div>
                 <div>
-                    <i class="fa-solid fa-ban" id='${ id }'></i>
-                    <i class="fa-solid fa-check d-none" id='${ id }'></i>
+                    <i class="fa-solid fa-ban ${ status == 'active' ? '' : 'fa-check' } U${ id }" id='${ id }'></i>
                 </div>
             </div>
         </div>`
     }
 
 
-    const ban = () => {
-        const btn = document.querySelectorAll('i')
-        for (let i of btn) {
-            if (i.classList.contains('fa-ban'))
-                i.addEventListener('click', (e) => {
-                    axios.post('api/v1/admin/users/activate/{id}')
+    const ban = (x) => {
+        let id = `.U${ x }`
+        const btn = document.querySelector('#iframe').contentDocument.querySelector(id)
+        btn.addEventListener('click', (e) => {
+            console.log(e.target.id)
+            if (btn.classList.contains('fa-check')) {
+                let token
+                if (localStorage.getItem('token'))
+                    token = localStorage.getItem('token')
+                let data = new FormData()
+                axios.post(`http://127.0.0.1:8000/api/v1/admin/users/activate/${ e.target.id }`, data, {
+                    headers: {
+                        Authorization: `Bearer ${ token }`
+                    }
                 })
-        }
+                    .then((res) => {
+                        console.log(res)
+                        btn.classList.toggle('fa-check')
+                    }).catch((err) => {
+                        console.log(err)
+                    })
+            } else {
+                console.log('fuck me')
+                let token
+                if (localStorage.getItem('token'))
+                    token = localStorage.getItem('token')
+                let data = new FormData()
+                axios.post(`http://127.0.0.1:8000/api/v1/admin/users/suspend/${ e.target.id }`, data, {
+                    headers: {
+                        Authorization: `Bearer ${ token }`
+                    }
+                })
+                    .then((res) => {
+                        console.log(res)
+                        btn.classList.toggle('fa-check')
+                    }).catch((err) => {
+                        console.log(err)
+                    })
+            }
+        })
 
     }
+
 
     const userCardGenerator = () => {
         let container = document.querySelector('#iframe').contentDocument.querySelector('.subview')
         container.innerHTML = ``
         for (let user of users) {
-            let element = userCard(`${ user.first_name } ${ user.last_name }`, user.email, user.phone, user.id)
+            let element = userCard(`${ user.first_name } ${ user.last_name }`, user.email, user.phone, user.id, user.status)
             container.insertAdjacentHTML('beforeend', element)
+            ban(user.id)
         }
     }
 }
