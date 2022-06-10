@@ -143,9 +143,33 @@ i {
 .prod-cat-body {
   margin: 0;
   justify-content: flex-start;
+  width: 100%;
+  background-color: rgb(172, 172, 172);
 }
 
 .prod-cat-container {
   width: calc(100% - 4em);
   height: fit-content;
+}
+
+.add-container {
+  margin-top: 2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80vw;
+}
+
+.add-product {
+  border-radius: 10px;
+  background-color: rgb(0, 97, 0);
+  padding: 0.5em 1em;
+  color: white;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+
+.add-product:hover {
+  background-color: rgb(0, 68, 0);
 }
