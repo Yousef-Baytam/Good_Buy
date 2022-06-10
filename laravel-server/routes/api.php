@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\AdminUsersController;
 use App\Http\Controllers\user\UsersController;
 use App\Http\Controllers\user\FavouritesController;
 use App\Http\Controllers\products\ProductsController;
+use App\Http\Controllers\products\CategoriesController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -41,10 +42,10 @@ Route::group(['prefix' => 'v1'], function () {
                     Route::delete('/delete/{id}', [AdminProductsController::class, 'deleteProduct']);
                 });
                 Route::group(['prefix' => 'categories'], function () {
-                    Route::get('/{id?}', [ProductsController::class, 'getCategory']);
-                    Route::post('/add', [AdminProductsController::class, 'addCategory']);
-                    Route::patch('/update/{id}', [AdminProductsController::class, 'updateCategory']);
-                    Route::delete('/delete/{id}', [AdminProductsController::class, 'deleteCategory']);
+                    Route::get('/{id?}', [CategoriesController::class, 'getCategory']);
+                    Route::post('/add', [CategoriesController::class, 'addCategory']);
+                    Route::patch('/update/{id}', [CategoriesController::class, 'updateCategory']);
+                    Route::delete('/delete/{id}', [CategoriesController::class, 'deleteCategory']);
                 });
                 Route::group(['prefix' => 'users'], function () {
                     Route::get('/', [AdminUsersController::class, 'getAllUsers']);
