@@ -94,6 +94,7 @@ iframe {
 
 .subview {
   width: calc(100% - 4em);
+  height: fit-content;
   display: flex;
   margin: 2em;
   flex-direction: row;
@@ -109,6 +110,7 @@ iframe {
   background-color: black;
   padding: 1em;
   border-radius: 10px;
+  margin-bottom: 1em;
 }
 
 .d-none {
@@ -132,4 +134,8 @@ iframe {
   width: fit-content;
   display: flex;
   align-items: center;
+}
+
+i {
+  cursor: pointer;
 }

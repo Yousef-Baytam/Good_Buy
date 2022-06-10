@@ -11,7 +11,6 @@ module.exports = (arr) => {
         }
     })
         .then((res) => {
-            console.log(res.data.res)
             users = res.data.res
             userCardGenerator()
         }).catch((err) => {
@@ -43,7 +42,6 @@ module.exports = (arr) => {
         let id = `.U${ x }`
         const btn = document.querySelector('#iframe').contentDocument.querySelector(id)
         btn.addEventListener('click', (e) => {
-            console.log(e.target.id)
             if (btn.classList.contains('fa-check')) {
                 let token
                 if (localStorage.getItem('token'))
@@ -55,13 +53,11 @@ module.exports = (arr) => {
                     }
                 })
                     .then((res) => {
-                        console.log(res)
                         btn.classList.toggle('fa-check')
                     }).catch((err) => {
                         console.log(err)
                     })
             } else {
-                console.log('fuck me')
                 let token
                 if (localStorage.getItem('token'))
                     token = localStorage.getItem('token')
@@ -72,7 +68,6 @@ module.exports = (arr) => {
                     }
                 })
                     .then((res) => {
-                        console.log(res)
                         btn.classList.toggle('fa-check')
                     }).catch((err) => {
                         console.log(err)
