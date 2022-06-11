@@ -306,6 +306,14 @@ i {
     font-size: 1.2em;
 }
 
+.user-info div {
+    width: 100%;
+}
+
+.user-info div input {
+    width: 30%;
+}
+
 button {
     font-size: 1em;
     padding: 0.3em 1em;
