@@ -10,22 +10,21 @@ body {
     align-items: center;
     background-color: rgb(147, 169, 190);
     font-size: 1.3em;
+    overflow-x: hidden;
 }
 
 form {
     display: flex;
-    flex-direction: row;
-    width: 700px;
+    flex-direction: column;
+    width: 350px;
     height: 300px;
     align-content: center;
     justify-content: space-around;
     margin: 20px;
-    flex-wrap: wrap;
 }
 
 form div {
     display: flex;
-    width: 50%;
     flex-direction: column;
     justify-content: center;
 }
@@ -36,16 +35,18 @@ input {
     height: 2em;
     padding: 10px;
     border-radius: 5px;
-    width: 92%;
+    width: 100%;
     align-self: center;
 }
 
-
+.login-form .password-label {
+    margin-top: 1em;
+}
 
 input[type='submit'] {
     width: 50%;
     height: 3em;
-    margin-top: 2em;
+    margin-top: 3em;
     cursor: pointer;
     transition: all 200ms ease;
 }
@@ -73,6 +74,72 @@ input[type='submit']:active {
 
 [last] {
     text-align: center;
+}
+
+
+[register] {
+    display: flex;
+    flex-direction: row;
+    width: 700px;
+    height: 300px;
+    align-content: center;
+    justify-content: space-around;
+    margin: 20px;
+    flex-wrap: wrap;
+}
+
+[register] div {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    justify-content: center;
+}
+
+[register] input {
+    outline: 0;
+    border: 1px solid rgba(128, 128, 128, 0.356);
+    height: 1.5em;
+    padding: 10px;
+    border-radius: 5px;
+    width: 92%;
+    margin-bottom: 0.5em;
+    align-self: center;
+}
+
+
+
+[register] input[type='submit'] {
+    width: 30%;
+    height: 3em;
+    margin-top: 2em;
+    cursor: pointer;
+    transition: all 200ms ease;
+}
+
+input[type='submit']:active {
+    background-color: rgb(155, 155, 155);
+}
+
+[register] .form-container {
+    background-color: rgb(223, 223, 223);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.d-none {
+    display: none !important;
+}
+
+#login-form div div,
+[register] #register-form div div {
+    font-size: 13px;
+    width: 100%;
+    display: inline;
+}
+
+[register] [last] {
+    text-align: center;
     width: 100%;
 }
 
@@ -84,4 +151,12 @@ span {
 
 span:hover {
     text-decoration: underline;
+}
+
+.scaled {
+    transform: scale(0);
+}
+
+.unscaled {
+    transform: scale(1);
 }

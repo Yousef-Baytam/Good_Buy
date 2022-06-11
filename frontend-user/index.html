@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <link rel="stylesheet" href="./styles/app.css">
         <title>Document</title>
     </head>
@@ -11,24 +12,24 @@
         <div>
             <h1>Welcome to Good Buy</h1>
         </div>
-        <div class="form-container d-none">
-            <form action="" id="login-form">
+        <div class="form-container">
+            <form action="" id="login-form" login>
                 <div>
                     <label for="email">User Email</label>
-                    <input type="email" placeholder="Email" id="email">
+                    <input type="email" placeholder="Email" id="login-email">
                 </div>
                 <div>
                     <label class="password-label" for="Password">User Password</label>
-                    <input type="password" placeholder="Password" id="password">
+                    <input type="password" placeholder="Password" id="login-password">
                 </div>
                 <div last>
-                    <input type="submit" name="submit" id="submit">
-                    <div register>Dont have an accout? <span> Register</span></div>
+                    <input type="submit" name="submit" id="login" value="Log In">
+                    <div>Dont have an accout? <span> Register</span></div>
                 </div>
             </form>
         </div>
-        <div class="form-container">
-            <form action="" id="login-form">
+        <div class="form-container ">
+            <form action="" id="register-form" register>
                 <div>
                     <label for="first_name">First Name</label>
                     <input type="first_name" placeholder="First Name" id="first_name">
@@ -50,12 +51,13 @@
                     <input type="phone" placeholder="Phone" id="phone">
                 </div>
                 <div last>
-                    <input type="submit" name="submit" id="submit">
+                    <input type="submit" name="submit" id="register" value="Register">
                 </div>
             </form>
         </div>
         <div>
             <h5>fun fact! we're the ali express version of Best Buy :D</h5>
         </div>
+        <script src="./scripts/app.js"></script>
     </body>
 </html>
