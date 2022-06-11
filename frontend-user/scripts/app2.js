@@ -2,6 +2,7 @@ const container = document.querySelector('.container')
 let products
 let token
 let user
+let favourites
 
 if (localStorage.getItem('token')) {
     token = localStorage.getItem('token')
@@ -28,12 +29,12 @@ const newProducts = () => {
     })
         .then((res) => {
             products = res.data.res
-            productCardGenerator()
+            console.log(products)
         }).catch((err) => {
             console.log(err)
         })
 }
-
+newProducts()
 const productCard = (name, price, inv, cat, fav, img, id) => {
     return `<div class="product-card-container">
                 <div class="product-card">
@@ -59,9 +60,26 @@ const productCard = (name, price, inv, cat, fav, img, id) => {
             </div>`
 }
 
-const renderCards = (arr) => {
+const getFavourites = () => {
+    axios.get('http://127.0.0.1:8000/api/v1/user/products/favourite/all', {
+        headers: {
+            Authorization: `Bearer ${ token }`
+        }
+    })
+        .then((res) => {
+            console.log(res)
+            favourites = res.data.res
+            console.log(favourites)
+        }).catch((err) => {
+            console.log(err)
+        })
+
+}
+
+const productCardGenerator = (arr) => {
     container.innerHTML = ``
     for (let prod of arr) {
-        let card = productCard(prod.product_name, prod.price,)
+        let card = productCard(prod.product_name, prod.price, prod.inventory_id == 1 ? 'In Stock' : 'Out of Stock', prod.category ? prod.category.category : 'N/A', favourites.include(prod) ? true : false, prod.img, prod.id)
+        container.insertAdjacentHTML('beforeend', card)
     }
 }
