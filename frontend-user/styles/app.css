@@ -277,9 +277,47 @@ i {
 #userImgDsiplay {
     border-radius: 50%;
     width: 500px;
+    margin-right: 3em;
+}
+
+.user-img {
+    margin-right: 3em;
 }
 
 .fa-camera {
     float: none;
     color: red;
+}
+
+.user-head {
+    display: flex;
+    align-items: center;
+    margin: 3em;
+    width: 100%;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 50%;
+    height: 80%;
+    font-size: 1.2em;
+}
+
+button {
+    font-size: 1em;
+    padding: 0.3em 1em;
+    border-radius: 10px;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border: 0;
+    cursor: pointer;
+    transition: all 200ms ease;
+}
+
+button:hover {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
 }

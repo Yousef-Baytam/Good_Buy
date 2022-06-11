@@ -41,8 +41,8 @@ const newProducts = async () => {
             console.log(err)
         })
 }
-
-newProducts()
+if (window.location.href.includes('products.html'))
+    newProducts()
 const productCard = (name, price, inv, cat, fav, img, id) => {
     return `<div class="product-card-container">
                 <div class="product-card">
