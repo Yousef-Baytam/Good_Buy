@@ -196,6 +196,14 @@ i {
 }
 
 .image-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-evenly;
+}
+
+.image-container img {
   width: 150px;
 }
 
