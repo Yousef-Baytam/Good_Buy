@@ -4,8 +4,13 @@ window.addEventListener('DOMContentLoaded', () => {
     const userBtn = document.querySelector('#userBtn')
     const productBtn = document.querySelector('#productBtn')
     const categoryBtn = document.querySelector('#categoryBtn')
+    const logout = document.querySelector('#logout')
 
-
+    if (logout)
+        logout.addEventListener('click', () => {
+            localStorage.clear()
+            window.location.href = './index.html'
+        })
     if (window.location.href.includes('index.html'))
         document.querySelector('#login-form').addEventListener('submit', async (e) => {
             e.preventDefault()
@@ -50,24 +55,29 @@ window.addEventListener('DOMContentLoaded', () => {
     if (!window.location.href.includes('index'))
         adminPage()
 
-    userBtn.addEventListener('click', () => {
-        if (!document.querySelector('iframe').attributes.src.textContent.includes('user')) {
-            document.querySelector('iframe').attributes.src.textContent = './views/users.html'
-            require('./userCards')()
-        }
-    })
-    productBtn.addEventListener('click', () => {
-        if (!document.querySelector('iframe').attributes.src.textContent.includes('products')) {
-            document.querySelector('iframe').attributes.src.textContent = './views/products.html'
-            require('./productCards')()
-        }
-    })
-    categoryBtn.addEventListener('click', () => {
-        if (!document.querySelector('iframe').attributes.src.textContent.includes('categories')) {
-            document.querySelector('iframe').attributes.src.textContent = './views/categories.html'
-            require('./categoryCards')()
-        }
-    })
+    if (userBtn)
+        userBtn.addEventListener('click', () => {
+            if (!document.querySelector('iframe').attributes.src.textContent.includes('user')) {
+                document.querySelector('iframe').attributes.src.textContent = './views/users.html'
+                require('./userCards')()
+            }
+        })
+
+    if (productBtn)
+        productBtn.addEventListener('click', () => {
+            if (!document.querySelector('iframe').attributes.src.textContent.includes('products')) {
+                document.querySelector('iframe').attributes.src.textContent = './views/products.html'
+                require('./productCards')()
+            }
+        })
+
+    if (categoryBtn)
+        categoryBtn.addEventListener('click', () => {
+            if (!document.querySelector('iframe').attributes.src.textContent.includes('categories')) {
+                document.querySelector('iframe').attributes.src.textContent = './views/categories.html'
+                require('./categoryCards')()
+            }
+        })
 
     if (document.querySelector('iframe'))
         if (document.querySelector('iframe').attributes.src.textContent.includes('user'))
