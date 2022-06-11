@@ -160,3 +160,37 @@ span:hover {
 .unscaled {
     transform: scale(1);
 }
+
+.products-page {
+    background-color: rgb(226, 226, 226);
+    margin: 0;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+nav {
+    width: calc(100% - 6em);
+    display: flex;
+    justify-content: space-between;
+    padding: 1em 3em;
+    align-items: center;
+    background-color: rgb(153, 153, 153);
+}
+
+nav a,
+[logout] {
+    text-decoration: none;
+    color: white;
+    padding: 0.4em 1em;
+    transition: all 200ms ease;
+}
+
+nav a:hover,
+[logout]:hover {
+    text-decoration: none;
+    color: white;
+    background-color: cornflowerblue;
+    padding: 0.4em 1em;
+    border-radius: 10px;
+    cursor: pointer;
+}
