@@ -29,10 +29,19 @@ module.exports = () => {
             for (let cat of categories) {
                 catSelect.insertAdjacentHTML('beforeend', `<option value="${ cat.category }">${ cat.category }</option>`)
             }
-
+            const addProductBtn = document.querySelector('#iframe').contentDocument.querySelector('.add-product')
+            const addProductForm = document.querySelector('#iframe').contentDocument.querySelector('#add-product-form')
+            addProductBtn.addEventListener('click', (e) => {
+                e.target.classList.toggle('active')
+                if (e.target.classList.contains('active'))
+                    addProductForm.style.maxHeight = `500px`
+                else
+                    addProductForm.style.maxHeight = `0px`
+            })
         }).catch((err) => {
             console.log(err)
         })
+
 
     const productCard = (name, price, image, inv, id, cat) => {
         return `<div class="card-container">

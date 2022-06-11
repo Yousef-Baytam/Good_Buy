@@ -192,7 +192,14 @@ i {
 }
 
 #add-product-form {
+  box-sizing: border-box;
   height: 500px;
+  width: fit-content;
+  transition: all 200ms ease;
+}
+
+#add-product-form input {
+  width: 350px;
 }
 
 .image-container {
@@ -210,4 +217,10 @@ i {
 select {
   height: fit-content;
   width: 370px;
+}
+
+.toggle {
+  max-height: 0px;
+  overflow: hidden;
+  transition: all 200ms ease;
 }
