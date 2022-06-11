@@ -134,7 +134,7 @@ module.exports = () => {
             document.querySelector('#iframe').contentDocument.querySelector('#name').value = clicked.product_name
             document.querySelector('#iframe').contentDocument.querySelector('#price').value = clicked.price
             document.querySelector('#iframe').contentDocument.querySelector('#inventory').value = clicked.inventory_id == 1 ? 'In Stock' : 'Out of Stock'
-            document.querySelector('#iframe').contentDocument.querySelector('#product-category').value = clicked.category.category
+            document.querySelector('#iframe').contentDocument.querySelector('#product-category').value = clicked.category ? clicked.category.category : ''
             productImgDsiplay.src = clicked.image
             submit.classList.toggle('d-none')
             update.classList.toggle('d-none')
@@ -203,7 +203,7 @@ module.exports = () => {
         let container = document.querySelector('#iframe').contentDocument.querySelector('.subview')
         container.innerHTML = ``
         for (let product of products) {
-            let element = productCard(product.product_name, product.price, product.image, product.inventory_id == 1 ? 'In Stock' : 'Out of Stock', product.id, product.category.category)
+            let element = productCard(product.product_name, product.price, product.image, product.inventory_id == 1 ? 'In Stock' : 'Out of Stock', product.id, product.category ? product.category.category : 'deleted')
             container.insertAdjacentHTML('beforeend', element)
             ban(product.id)
             edit(product.id)

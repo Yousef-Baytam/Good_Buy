@@ -7,8 +7,8 @@ module.exports = () => {
         token = localStorage.getItem('token')
 
     document.querySelector('#iframe').addEventListener('load', () => {
-        if (document.querySelector('iframe').attributes.src.textContent.includes('categories')) {
-            addItem()
+        if (document.querySelector('iframe').attributes.src.textContent.includes('categories.html')) {
+            addCat()
             addCatBtn()
         }
     })
@@ -40,7 +40,7 @@ module.exports = () => {
         })
     }
 
-    const addItem = () => {
+    const addCat = () => {
         const data = new FormData
         const addCategroyForm = document.querySelector('#iframe').contentDocument.querySelector('#add-category-form')
         addCategroyForm.addEventListener('submit', (e) => {
@@ -65,7 +65,7 @@ module.exports = () => {
             <div class="card">
                 <div class="details">
                     <div class="info">
-                        <div id='user_name'>Name: ${ name }</div>
+                        <div id='user_name'>Category: ${ name }</div>
                     </div>
                 </div>
                 <div>
@@ -151,14 +151,14 @@ module.exports = () => {
             let token
             if (localStorage.getItem('token'))
                 token = localStorage.getItem('token')
-            axios.delete(`http://127.0.0.1:8000/api/v1/admin/products/delete/${ e.target.id }`, {
+            axios.delete(`http://127.0.0.1:8000/api/v1/admin/categories/delete/${ e.target.id }`, {
                 headers: {
                     Authorization: `Bearer ${ token }`
                 }
             })
                 .then((res) => {
                     console.log(res)
-                    newProducts()
+                    getCat()
                 }).catch((err) => {
                     console.log(err)
                 })
@@ -171,6 +171,7 @@ module.exports = () => {
         for (let category of categories) {
             let element = categoryCard(category.category, category.id)
             container.insertAdjacentHTML('beforeend', element)
+            ban(category.id)
         }
     }
 }
