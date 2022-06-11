@@ -10,6 +10,7 @@ body {
   align-items: center;
   background-color: rgb(147, 169, 190);
   font-size: 1.3em;
+  overflow-x: hidden;
 }
 
 form {
