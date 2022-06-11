@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\City;
 
 class AuthController extends Controller
 {
@@ -44,7 +45,9 @@ class AuthController extends Controller
 
     public function me()
     {
-        return response()->json(auth()->user());
+        $user =  Auth::user();
+        $user->city = User::find($user->id)->cities;
+        return $user;
     }
 
     public function register(Request $request)
