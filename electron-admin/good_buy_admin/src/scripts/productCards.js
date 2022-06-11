@@ -5,6 +5,9 @@ module.exports = () => {
     let token
     if (localStorage.getItem('token'))
         token = localStorage.getItem('token')
+    document.querySelector('#iframe').addEventListener('load', () => {
+        addItem()
+    })
     const newProducts = () => {
         axios.get('http://127.0.0.1:8000/api/v1/admin/products/', {
             headers: {
@@ -12,7 +15,6 @@ module.exports = () => {
             }
         })
             .then((res) => {
-                addItem()
                 products = res.data.res
                 productCardGenerator()
             }).catch((err) => {
@@ -133,6 +135,34 @@ module.exports = () => {
             productImgDsiplay.src = clicked.image
             submit.classList.toggle('d-none')
             update.classList.toggle('d-none')
+            update.id = e.target.id
+        })
+    }
+
+    const updateProduct = () => {
+        const update = document.querySelector('#iframe').contentDocument.querySelector("[update]")
+        update.addEventListener('click', () => {
+            const data = new FormData
+            data.append('image', productImgDsiplay.src)
+            data.append('product_name', document.querySelector('#iframe').contentDocument.querySelector('#name').value)
+            data.append('price', document.querySelector('#iframe').contentDocument.querySelector('#price').value)
+            data.append('inventory', document.querySelector('#iframe').contentDocument.querySelector('#inventory').value)
+            data.append('category', document.querySelector('#iframe').contentDocument.querySelector('#product-category').value)
+            axios.post('http://127.0.0.1:8000/api/v1/admin/products/add', data, {
+                headers: {
+                    Authorization: `Bearer ${ token }`,
+                }
+            })
+                .then((res) => {
+                    newProducts()
+                    document.querySelector('#iframe').contentDocument.querySelector('#name').value = ""
+                    document.querySelector('#iframe').contentDocument.querySelector('#price').value = ""
+                    document.querySelector('#iframe').contentDocument.querySelector('#inventory').value = ""
+                    document.querySelector('#iframe').contentDocument.querySelector('#product-category').value = ""
+                    productImgDsiplay.src = "../assets/blank-profile.webp"
+                }).catch((err) => {
+                    console.log(err)
+                });
         })
     }
 
