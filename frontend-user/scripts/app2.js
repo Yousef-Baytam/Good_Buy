@@ -43,7 +43,7 @@ const productCard = (name, price, inv, cat, fav, img, id) => {
                         <img src="${ img ? img : '../assets/blank-profile.webp' }" alt="">
                     </div>
                     <div class="product-details">
-                        <i class="fa-${ fav ? 'solid' : 'regular' } fa-heart" style="color: red;" id='F${ id }'></i>
+                        <i class="fa-${ fav ? 'solid' : 'regular' } fa-heart F${ id }" style="color: red;" id='${ id }'></i>
                         <div class="name">
                             ${ name }
                         </div>
@@ -85,45 +85,43 @@ const productCardGenerator = async (arr) => {
     for (let prod of arr) {
         let card = productCard(prod.product_name, prod.price, prod.inventory_id == 1 ? 'In Stock' : 'Out of Stock', prod.category ? prod.category.category : 'N/A', favouritesIds.includes(prod.id) ? true : false, prod.image, prod.id)
         container.insertAdjacentHTML('beforeend', card)
+        listenToFavourites(`.F${ prod.id }`)
     }
 }
 
 const favouriteProduct = async (id, fav) => {
+    const data = new FormData()
     if (fav)
-        await axios.post(`http://127.0.0.1:8000/api/v1/user/products/favourite/add/${ id }`, {
+        await axios.post(`http://127.0.0.1:8000/api/v1/user/products/favourite/add/${ id }`, data, {
             headers: {
                 Authorization: `Bearer ${ token }`
             }
         })
-            .then((res) => {
-                console.log(res)
-            }).catch((err) => {
+            .catch((err) => {
                 console.log(err)
             })
     else
-        await axios.post(`http://127.0.0.1:8000/api/v1/user/products/favourite/remove/${ id }`, {
+        await axios.post(`http://127.0.0.1:8000/api/v1/user/products/favourite/remove/${ id }`, data, {
             headers: {
                 Authorization: `Bearer ${ token }`
             }
         })
-            .then((res) => {
-                console.log(res)
-            }).catch((err) => {
+            .catch((err) => {
                 console.log(err)
             })
 }
 
 const listenToFavourites = (heart) => {
-    heart.addEventListener('click', async (e) => {
+    document.querySelector(heart).addEventListener('click', async (e) => {
         if (e.target.classList.contains('fa-regular')) {
-            await favouriteProduct(e.target.id, true)
             e.target.classList.toggle('fa-regular')
             e.target.classList.toggle('fa-solid')
+            await favouriteProduct(e.target.id, true)
         }
         else {
-            await favouriteProduct(e.target.id, false)
             e.target.classList.toggle('fa-regular')
             e.target.classList.toggle('fa-solid')
+            await favouriteProduct(e.target.id, false)
         }
     })
 }
