@@ -49,7 +49,7 @@ register.addEventListener('submit', async (e) => {
         .then((res) => {
             if (res.data) {
                 localStorage.setItem('token', res.data.authorisation.token)
-                window.location.href = './products.html'
+                window.location.href = './views/products.html'
             }
         })
         .catch((err) => console.log(err))
