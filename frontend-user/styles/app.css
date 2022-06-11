@@ -214,7 +214,13 @@ nav a:hover,
 }
 
 .container {
-    padding: 3em;
+    padding: 1em;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.product-card-container {
+    margin: 1.5em;
 }
 
 .product-card {
