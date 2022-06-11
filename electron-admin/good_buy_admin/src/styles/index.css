@@ -10,7 +10,6 @@ body {
   align-items: center;
   background-color: rgb(147, 169, 190);
   font-size: 1.3em;
-  overflow: hidden;
 }
 
 form {
@@ -29,7 +28,8 @@ form div {
   justify-content: center;
 }
 
-input {
+input,
+select {
   outline: 0;
   border: 1px solid rgba(128, 128, 128, 0.356);
   height: 2em;
@@ -197,4 +197,9 @@ i {
 
 .image-container {
   width: 150px;
+}
+
+select {
+  height: fit-content;
+  width: 370px;
 }

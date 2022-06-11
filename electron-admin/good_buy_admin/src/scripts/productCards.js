@@ -17,6 +17,23 @@ module.exports = () => {
             console.log(err)
         })
 
+    let categories
+    axios.get('http://127.0.0.1:8000/api/v1/admin/categories/', {
+        headers: {
+            Authorization: `Bearer ${ token }`
+        }
+    })
+        .then((res) => {
+            categories = res.data.res
+            const catSelect = document.querySelector('#iframe').contentDocument.querySelector('#product-category')
+            for (let cat of categories) {
+                catSelect.insertAdjacentHTML('beforeend', `<option value="${ cat.category }">${ cat.category }</option>`)
+            }
+
+        }).catch((err) => {
+            console.log(err)
+        })
+
     const productCard = (name, price, image, inv, id, cat) => {
         return `<div class="card-container">
             <div class="card">
