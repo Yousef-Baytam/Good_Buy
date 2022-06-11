@@ -193,12 +193,17 @@ i {
 
 #add-product-form {
   box-sizing: border-box;
-  height: 500px;
+  height: 700px;
   width: fit-content;
   transition: all 200ms ease;
 }
 
 #add-product-form input {
+  width: 350px;
+}
+
+#add-product-form input[type='submit'] {
+  margin-top: 1em;
   width: 350px;
 }
 

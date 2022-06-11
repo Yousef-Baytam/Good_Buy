@@ -34,7 +34,7 @@ module.exports = () => {
             addProductBtn.addEventListener('click', (e) => {
                 e.target.classList.toggle('active')
                 if (e.target.classList.contains('active'))
-                    addProductForm.style.maxHeight = `500px`
+                    addProductForm.style.maxHeight = `600px`
                 else
                     addProductForm.style.maxHeight = `0px`
             })
