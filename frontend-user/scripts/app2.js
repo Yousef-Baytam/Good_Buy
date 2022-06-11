@@ -3,6 +3,7 @@ let products
 let token
 let user
 let favourites
+let cities
 
 if (localStorage.getItem('token')) {
     token = localStorage.getItem('token')
@@ -41,8 +42,10 @@ const newProducts = async () => {
             console.log(err)
         })
 }
+
 if (window.location.href.includes('products.html'))
     newProducts()
+
 const productCard = (name, price, inv, cat, fav, img, id) => {
     return `<div class="product-card-container">
                 <div class="product-card">
@@ -67,6 +70,21 @@ const productCard = (name, price, inv, cat, fav, img, id) => {
                 </div>
             </div>`
 }
+
+const getCities = async () => {
+    await axios.get('http://127.0.0.1:8000/api/v1/user/users/cities', {
+        headers: {
+            Authorization: `Bearer ${ token }`
+        }
+    })
+        .then((res) => {
+            console.log(res)
+            cities = res.data.status
+        }).catch((err) => {
+            console.log(err)
+        })
+}
+getCities()
 
 const getFavourites = async () => {
     await axios.get('http://127.0.0.1:8000/api/v1/user/products/favourite/all', {
