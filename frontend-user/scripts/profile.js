@@ -26,10 +26,13 @@ const sad = async () => {
     userImg.src = user.profile_pic ? user.profile_pic : "../assets/blank-profile.webp"
     await getCities()
     await getFavourites()
+}
+const addCities = async () => {
+    await sad()
     for (let i of cities)
         inpCity.insertAdjacentHTML('beforeend', `<option value="${ i.city_name }">${ i.city_name }</option>`)
 }
-sad()
+addCities()
 
 const edit = () => {
     editBtn.addEventListener('click', () => {
@@ -45,7 +48,19 @@ const edit = () => {
         for (let i of spanList)
             i.classList.toggle('d-none')
     })
-    saveBtn.addEventListener('click', () => {
+    saveBtn.addEventListener('click', async () => {
+        console.log(inpCity.value)
+        await axios.patch('http://127.0.0.1:8000/api/v1/user/users/update', {
+            first_name: inpName.value,
+            last_name: inpLast.value,
+            email: inpEmail.value,
+            phone: inpPhone.value,
+            city: inpCity.value,
+        }, {
+            headers: {
+                Authorization: `Bearer ${ token }`
+            }
+        })
         saveBtn.classList.toggle('d-none')
         editBtn.classList.toggle('d-none')
         for (let i of inpList)
@@ -57,6 +72,7 @@ const edit = () => {
         inpCity.value = `${ user.city.city_name }`
         for (let i of spanList)
             i.classList.toggle('d-none')
+        sad()
     })
 }
 edit()
