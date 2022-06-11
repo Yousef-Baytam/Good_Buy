@@ -106,6 +106,36 @@ module.exports = () => {
     }
 
 
+    const edit = (x) => {
+        let id = `.U${ x }`
+        const btn = document.querySelector('#iframe').contentDocument.querySelector(id)
+        const addProductForm = document.querySelector('#iframe').contentDocument.querySelector('#add-product-form')
+        const productImgDsiplay = document.querySelector('#iframe').contentDocument.querySelector('#productImgDsiplay')
+        const submit = document.querySelector('#iframe').contentDocument.querySelector("input[type='submit']")
+        const update = document.querySelector('#iframe').contentDocument.querySelector("[update]")
+
+        btn.addEventListener('click', (e) => {
+            e.target.classList.toggle('clicked')
+            if (e.target.classList.contains('clicked'))
+                addProductForm.style.maxHeight = `600px`
+            else
+                addProductForm.style.maxHeight = `0px`
+            let clicked
+            for (let i of products) {
+                if (i.id == e.target.id)
+                    clicked = i
+            }
+            console.log(clicked)
+            document.querySelector('#iframe').contentDocument.querySelector('#name').value = clicked.product_name
+            document.querySelector('#iframe').contentDocument.querySelector('#price').value = clicked.price
+            document.querySelector('#iframe').contentDocument.querySelector('#inventory').value = clicked.inventory_id == 1 ? 'In Stock' : 'Out of Stock'
+            document.querySelector('#iframe').contentDocument.querySelector('#product-category').value = clicked.category.category
+            productImgDsiplay.src = clicked.image
+            submit.classList.toggle('d-none')
+            update.classList.toggle('d-none')
+        })
+    }
+
     const ban = (x) => {
         let id = `.T${ x }`
         const btn = document.querySelector('#iframe').contentDocument.querySelector(id)
@@ -138,6 +168,7 @@ module.exports = () => {
             let element = productCard(product.product_name, product.price, product.image, product.inventory_id == 1 ? 'In Stock' : 'Out of Stock', product.id, product.category.category)
             container.insertAdjacentHTML('beforeend', element)
             ban(product.id)
+            edit(product.id)
         }
     }
 }
