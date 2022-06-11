@@ -1,30 +1,14 @@
 const axios = require('axios')
 
 module.exports = () => {
-    let products
+    let categories
     let token
     if (localStorage.getItem('token'))
         token = localStorage.getItem('token')
     document.querySelector('#iframe').addEventListener('load', () => {
-        addItem()
-        updateProduct()
-    })
-    const newProducts = () => {
-        axios.get('http://127.0.0.1:8000/api/v1/admin/products/', {
-            headers: {
-                Authorization: `Bearer ${ token }`
-            }
-        })
-            .then((res) => {
-                products = res.data.res
-                productCardGenerator()
-            }).catch((err) => {
-                console.log(err)
-            })
-    }
-    newProducts()
 
-    let categories
+    })
+
     axios.get('http://127.0.0.1:8000/api/v1/admin/categories/', {
         headers: {
             Authorization: `Bearer ${ token }`
@@ -32,19 +16,7 @@ module.exports = () => {
     })
         .then((res) => {
             categories = res.data.res
-            const catSelect = document.querySelector('#iframe').contentDocument.querySelector('#product-category')
-            for (let cat of categories) {
-                catSelect.insertAdjacentHTML('beforeend', `<option value="${ cat.category }">${ cat.category }</option>`)
-            }
-            const addProductBtn = document.querySelector('#iframe').contentDocument.querySelector('.add-product')
-            const addProductForm = document.querySelector('#iframe').contentDocument.querySelector('#add-product-form')
-            addProductBtn.addEventListener('click', (e) => {
-                e.target.classList.toggle('active')
-                if (e.target.classList.contains('active'))
-                    addProductForm.style.maxHeight = `600px`
-                else
-                    addProductForm.style.maxHeight = `0px`
-            })
+            categoryCardGenerator()
         }).catch((err) => {
             console.log(err)
         })
@@ -86,18 +58,12 @@ module.exports = () => {
         })
     }
 
-    const productCard = (name, price, image, inv, id, cat) => {
+    const categoryCard = (name, id) => {
         return `<div class="card-container">
             <div class="card">
                 <div class="details">
-                    <div class="img">
-                        <img src="${ image ? image : '../assets/blank-profile.webp' }" alt="">
-                    </div>
                     <div class="info">
                         <div id='user_name'>Name: ${ name }</div>
-                        <div id='user_email'>Price: $${ price }</div>
-                        <div id='user_phone'>Category: ${ cat }</div>
-                        <div id='user_phone'>Inventory: ${ inv }</div>
                     </div>
                 </div>
                 <div>
@@ -197,15 +163,13 @@ module.exports = () => {
         })
     }
 
-    const productCardGenerator = () => {
+    const categoryCardGenerator = () => {
         console.log(1)
         let container = document.querySelector('#iframe').contentDocument.querySelector('.subview')
         container.innerHTML = ``
-        for (let product of products) {
-            let element = productCard(product.product_name, product.price, product.image, product.inventory_id == 1 ? 'In Stock' : 'Out of Stock', product.id, product.category.category)
+        for (let category of categories) {
+            let element = categoryCard(category.category, category.id)
             container.insertAdjacentHTML('beforeend', element)
-            ban(product.id)
-            edit(product.id)
         }
     }
 }
