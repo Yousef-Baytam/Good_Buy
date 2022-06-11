@@ -37,4 +37,11 @@ class UsersController extends Controller
             "status" => "Success",
         ], 200);
     }
+
+    public function getCities(Request $request)
+    {
+        return response()->json([
+            "status" => City::all(),
+        ], 200);
+    }
 }

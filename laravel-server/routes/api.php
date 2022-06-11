@@ -64,6 +64,7 @@ Route::group(['prefix' => 'v1'], function () {
                 Route::post('/favourite/remove/{id}', [FavouritesController::class, 'unfavouriteProduct']);
             });
             Route::group(['prefix' => 'users'], function () {
+                Route::get('/cities', [UsersController::class, 'getCities']);
                 Route::patch('/update', [UsersController::class, 'updateUser']);
                 Route::patch('/update/image', [UsersController::class, 'updateImage']);
             });
