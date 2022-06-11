@@ -273,3 +273,13 @@ i {
     padding: 0.3em 1em;
     border-radius: 10px;
 }
+
+#userImgDsiplay {
+    border-radius: 50%;
+    width: 500px;
+}
+
+.fa-camera {
+    float: none;
+    color: red;
+}
