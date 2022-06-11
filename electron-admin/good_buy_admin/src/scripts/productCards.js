@@ -5,18 +5,21 @@ module.exports = () => {
     let token
     if (localStorage.getItem('token'))
         token = localStorage.getItem('token')
-    axios.get('http://127.0.0.1:8000/api/v1/admin/products/', {
-        headers: {
-            Authorization: `Bearer ${ token }`
-        }
-    })
-        .then((res) => {
-            addItem()
-            products = res.data.res
-            productCardGenerator()
-        }).catch((err) => {
-            console.log(err)
+    const newProducts = () => {
+        axios.get('http://127.0.0.1:8000/api/v1/admin/products/', {
+            headers: {
+                Authorization: `Bearer ${ token }`
+            }
         })
+            .then((res) => {
+                addItem()
+                products = res.data.res
+                productCardGenerator()
+            }).catch((err) => {
+                console.log(err)
+            })
+    }
+    newProducts()
 
     let categories
     axios.get('http://127.0.0.1:8000/api/v1/admin/categories/', {
@@ -68,14 +71,7 @@ module.exports = () => {
                 }
             })
                 .then((res) => {
-                    products.push({
-                        product_name: document.querySelector('#iframe').contentDocument.querySelector('#name').value,
-                        price: document.querySelector('#iframe').contentDocument.querySelector('#price').value,
-                        inventory: document.querySelector('#iframe').contentDocument.querySelector('#inventory').value,
-                        category: document.querySelector('#iframe').contentDocument.querySelector('#product-category').value,
-                        image: productImgDsiplay.src
-                    })
-                    productCardGenerator()
+                    newProducts()
                     document.querySelector('#iframe').contentDocument.querySelector('#name').value = ""
                     document.querySelector('#iframe').contentDocument.querySelector('#price').value = ""
                     document.querySelector('#iframe').contentDocument.querySelector('#inventory').value = ""
@@ -124,7 +120,7 @@ module.exports = () => {
             })
                 .then((res) => {
                     console.log(res)
-                    require('./productCards')()
+                    newProducts()
                 }).catch((err) => {
                     console.log(err)
                 })
@@ -135,6 +131,7 @@ module.exports = () => {
 
 
     const productCardGenerator = () => {
+        console.log(1)
         let container = document.querySelector('#iframe').contentDocument.querySelector('.subview')
         container.innerHTML = ``
         for (let product of products) {
