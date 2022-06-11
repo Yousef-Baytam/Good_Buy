@@ -220,7 +220,6 @@ nav a:hover,
     width: 100%;
     height: 150px;
     object-fit: cover;
-
 }
 
 .container {
@@ -277,7 +276,9 @@ i {
 #userImgDsiplay {
     border-radius: 50%;
     width: 500px;
+    height: 500px;
     margin-right: 3em;
+    object-fit: cover;
 }
 
 .user-img {
@@ -312,6 +313,17 @@ i {
 
 .user-info div input {
     width: 30%;
+    height: 1em;
+    border: 0;
+}
+
+.user-info div select {
+    width: 30%;
+    height: 2.6em;
+    outline: none;
+    border: 0;
+    padding-left: 1em;
+    border-radius: 5px;
 }
 
 button {

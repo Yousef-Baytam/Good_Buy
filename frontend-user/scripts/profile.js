@@ -11,6 +11,7 @@ const inpLast = document.querySelector('#last')
 const inpEmail = document.querySelector('#email')
 const inpPhone = document.querySelector('#phone')
 const inpCity = document.querySelector('#city')
+const inpUserImg = document.querySelector('#userImg')
 const inpList = [inpName, inpLast, inpEmail, inpPhone, inpCity]
 
 const editBtn = document.querySelector('[one]')
@@ -76,3 +77,23 @@ const edit = () => {
     })
 }
 edit()
+
+const updateProfPic = () => {
+    inpUserImg.addEventListener('change', (e) => {
+        let reader = new FileReader()
+        reader.readAsDataURL(e.target.files[0])
+        reader.addEventListener('loadend', async () => {
+            userImg.src = reader.result
+            await axios.patch('http://127.0.0.1:8000/api/v1/user/users/update/image', {
+                profile_pic: reader.result,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${ token }`
+                }
+            })
+        })
+    })
+
+
+}
+updateProfPic()
