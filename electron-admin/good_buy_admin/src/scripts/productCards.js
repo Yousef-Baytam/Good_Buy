@@ -65,11 +65,22 @@ module.exports = () => {
             axios.post('http://127.0.0.1:8000/api/v1/admin/products/add', data, {
                 headers: {
                     Authorization: `Bearer ${ token }`,
-                    'Content-Type': 'application/x-www-form-urlencoded'
                 }
             })
                 .then((res) => {
-                    console.log(res)
+                    products.push({
+                        product_name: document.querySelector('#iframe').contentDocument.querySelector('#name').value,
+                        price: document.querySelector('#iframe').contentDocument.querySelector('#price').value,
+                        inventory: document.querySelector('#iframe').contentDocument.querySelector('#inventory').value,
+                        category: document.querySelector('#iframe').contentDocument.querySelector('#product-category').value,
+                        image: productImgDsiplay.src
+                    })
+                    productCardGenerator()
+                    document.querySelector('#iframe').contentDocument.querySelector('#name').value = ""
+                    document.querySelector('#iframe').contentDocument.querySelector('#price').value = ""
+                    document.querySelector('#iframe').contentDocument.querySelector('#inventory').value = ""
+                    document.querySelector('#iframe').contentDocument.querySelector('#product-category').value = ""
+                    productImgDsiplay.src = "../assets/blank-profile.webp"
                 }).catch((err) => {
                     console.log(err)
                 });
