@@ -20,6 +20,13 @@ if (localStorage.getItem('token')) {
         .catch((err) => window.location.href = '../')
 }
 
+const logout = () => {
+    localStorage.removeItem('token')
+    window.location.href = '../'
+}
+
+document.querySelector('[logout]').addEventListener('click', logout)
+
 const newProducts = async () => {
     await axios.get('http://127.0.0.1:8000/api/v1/user/products/', {
         headers: {
