@@ -239,3 +239,40 @@ select {
   border-radius: 10px;
   margin: auto;
 }
+
+#add-category-form {
+  box-sizing: border-box;
+  height: 700px;
+  width: fit-content;
+  transition: all 200ms ease;
+}
+
+#add-category-form input {
+  width: 350px;
+}
+
+#add-category-form input[type='submit'] {
+  margin-top: 1em;
+  width: 350px;
+}
+
+.add-category {
+  border-radius: 10px;
+  background-color: rgb(0, 97, 0);
+  padding: 0.5em 1em;
+  color: white;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: all 200ms ease;
+  width: 8em;
+}
+
+.add-category:hover {
+  background-color: rgb(0, 68, 0);
+}
+
+.add-category::after {
+  content: '\25be';
+  float: right;
+  transform: scale(1.3);
+}

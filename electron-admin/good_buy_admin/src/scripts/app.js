@@ -63,7 +63,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     })
     categoryBtn.addEventListener('click', () => {
-        if (!document.querySelector('iframe').attributes.src.textContent.includes('products')) {
+        if (!document.querySelector('iframe').attributes.src.textContent.includes('categories')) {
             document.querySelector('iframe').attributes.src.textContent = './views/categories.html'
             require('./categoryCards')()
         }

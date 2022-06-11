@@ -6,8 +6,10 @@ module.exports = () => {
     if (localStorage.getItem('token'))
         token = localStorage.getItem('token')
     document.querySelector('#iframe').addEventListener('load', () => {
-        addItem()
-        updateProduct()
+        if (document.querySelector('iframe').attributes.src.textContent.includes('products')) {
+            addItem()
+            updateProduct()
+        }
     })
     const newProducts = () => {
         axios.get('http://127.0.0.1:8000/api/v1/admin/products/', {

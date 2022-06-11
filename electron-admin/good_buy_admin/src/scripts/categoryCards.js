@@ -5,9 +5,12 @@ module.exports = () => {
     let token
     if (localStorage.getItem('token'))
         token = localStorage.getItem('token')
+
     document.querySelector('#iframe').addEventListener('load', () => {
-        addItem()
-        addCatBtn()
+        if (document.querySelector('iframe').attributes.src.textContent.includes('categories')) {
+            addItem()
+            addCatBtn()
+        }
     })
 
     const getCat = () => {
@@ -26,29 +29,30 @@ module.exports = () => {
     getCat()
 
     const addCatBtn = () => {
-        const addProductBtn = document.querySelector('#iframe').contentDocument.querySelector('.add-product')
-        const addProductForm = document.querySelector('#iframe').contentDocument.querySelector('#add-product-form')
-        addProductBtn.addEventListener('click', (e) => {
+        const addCategroyBtn = document.querySelector('#iframe').contentDocument.querySelector('.add-category')
+        const addCategroyForm = document.querySelector('#iframe').contentDocument.querySelector('#add-category-form')
+        addCategroyBtn.addEventListener('click', (e) => {
             e.target.classList.toggle('active')
             if (e.target.classList.contains('active'))
-                addProductForm.style.maxHeight = `200px`
+                addCategroyForm.style.maxHeight = `200px`
             else
-                addProductForm.style.maxHeight = `0px`
+                addCategroyForm.style.maxHeight = `0px`
         })
     }
+
     const addItem = () => {
         const data = new FormData
-        const addProductForm = document.querySelector('#iframe').contentDocument.querySelector('#add-product-form')
-        addProductForm.addEventListener('submit', (e) => {
+        const addCategroyForm = document.querySelector('#iframe').contentDocument.querySelector('#add-category-form')
+        addCategroyForm.addEventListener('submit', (e) => {
             e.preventDefault()
-            data.append('category_name', document.querySelector('#iframe').contentDocument.querySelector('#name').value)
+            data.append('category', document.querySelector('#iframe').contentDocument.querySelector('#name').value)
             axios.post('http://127.0.0.1:8000/api/v1/admin/categories/add', data, {
                 headers: {
                     Authorization: `Bearer ${ token }`,
                 }
             })
                 .then((res) => {
-                    newProducts()
+                    getCat()
                     document.querySelector('#iframe').contentDocument.querySelector('#name').value = ""
                 }).catch((err) => {
                     console.log(err)
@@ -76,7 +80,7 @@ module.exports = () => {
     const edit = (x) => {
         let id = `.U${ x }`
         const btn = document.querySelector('#iframe').contentDocument.querySelector(id)
-        const addProductForm = document.querySelector('#iframe').contentDocument.querySelector('#add-product-form')
+        const addProductForm = document.querySelector('#iframe').contentDocument.querySelector('#add-category-form')
         const productImgDsiplay = document.querySelector('#iframe').contentDocument.querySelector('#productImgDsiplay')
         const submit = document.querySelector('#iframe').contentDocument.querySelector("input[type='submit']")
         const update = document.querySelector('#iframe').contentDocument.querySelector("[update]")
@@ -106,7 +110,7 @@ module.exports = () => {
 
     const updateProduct = () => {
         const update = document.querySelector('#iframe').contentDocument.querySelector("[update]")
-        const addProductForm = document.querySelector('#iframe').contentDocument.querySelector('#add-product-form')
+        const addProductForm = document.querySelector('#iframe').contentDocument.querySelector('#add-category-form')
         const productImgDsiplay = document.querySelector('#iframe').contentDocument.querySelector('#productImgDsiplay')
         const submit = document.querySelector('#iframe').contentDocument.querySelector("input[type='submit']")
         update.addEventListener('click', (e) => {
