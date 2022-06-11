@@ -182,14 +182,15 @@ nav a,
     text-decoration: none;
     color: white;
     padding: 0.4em 1em;
+    border-radius: 10px;
     transition: all 200ms ease;
 }
 
 nav a:hover,
 [logout]:hover {
     text-decoration: none;
-    color: white;
-    background-color: cornflowerblue;
+    color: black;
+    background-color: white;
     padding: 0.4em 1em;
     border-radius: 10px;
     cursor: pointer;
