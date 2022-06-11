@@ -253,3 +253,15 @@ i {
     justify-content: space-between;
     box-sizing: border-box;
 }
+
+.header div {
+    display: flex;
+}
+
+.header div div {
+    display: flex;
+    align-items: center;
+    margin: 0em 1em 0 0;
+    padding: 0.3em 1em;
+    border-radius: 10px;
+}
