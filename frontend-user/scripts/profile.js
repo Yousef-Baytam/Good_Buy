@@ -27,6 +27,7 @@ const sad = async () => {
     userImg.src = user.profile_pic ? user.profile_pic : "../assets/blank-profile.webp"
     await getCities()
     await getFavourites()
+    productCardGenerator(favourites)
 }
 const addCities = async () => {
     await sad()
