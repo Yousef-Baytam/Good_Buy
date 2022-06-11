@@ -218,7 +218,7 @@ nav a:hover,
 .product-image img {
     border-radius: 10px;
     width: 100%;
-    height: 100px;
+    height: 150px;
     object-fit: cover;
 
 }
@@ -226,6 +226,7 @@ nav a:hover,
 .container {
     padding: 1em;
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
@@ -236,14 +237,21 @@ nav a:hover,
 .product-card {
     background-color: var(--main-color);
     color: var(--primary-color);
-    font-size: 0.7em;
-    width: 100%;
+    font-size: 0.9em;
+    width: 250px;
     padding: 1em;
     border-radius: 10px;
 }
 
+.name {
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
 i {
     float: right;
+    transform: scale(1.5);
+    cursor: pointer;
 }
 
 .header {
@@ -266,4 +274,58 @@ i {
     border-radius: 10px;
 }
 
-.header div div:hover {}
+#userImgDsiplay {
+    border-radius: 50%;
+    width: 500px;
+    margin-right: 3em;
+}
+
+.user-img {
+    margin-right: 3em;
+}
+
+.fa-camera {
+    float: none;
+    color: red;
+}
+
+.user-head {
+    display: flex;
+    align-items: center;
+    margin: 3em;
+    width: 100%;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 50%;
+    height: 80%;
+    font-size: 1.2em;
+}
+
+.user-info div {
+    width: 100%;
+}
+
+.user-info div input {
+    width: 30%;
+}
+
+button {
+    font-size: 1em;
+    padding: 0.3em 1em;
+    border-radius: 10px;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border: 0;
+    cursor: pointer;
+    transition: all 200ms ease;
+}
+
+button:hover {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
