@@ -1,3 +1,13 @@
+:root {
+    --main-color: rgb(153, 153, 153);
+    --primary-color: white;
+    --secondary-color: black;
+    --tertiary-color: #90B8F8;
+    --text-color: #000000;
+    --diabled-color: #2c3036;
+    font-family: 'Roboto', sans-serif;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
         Arial, sans-serif;
@@ -174,13 +184,13 @@ nav {
     justify-content: space-between;
     padding: 1em 3em;
     align-items: center;
-    background-color: rgb(153, 153, 153);
+    background-color: var(--main-color);
 }
 
 nav a,
 [logout] {
     text-decoration: none;
-    color: white;
+    color: var(--primary-color);
     padding: 0.4em 1em;
     border-radius: 10px;
     transition: all 200ms ease;
@@ -189,8 +199,8 @@ nav a,
 nav a:hover,
 [logout]:hover {
     text-decoration: none;
-    color: black;
-    background-color: white;
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
     padding: 0.4em 1em;
     border-radius: 10px;
     cursor: pointer;
@@ -224,7 +234,8 @@ nav a:hover,
 }
 
 .product-card {
-    background-color: rgb(170, 170, 170);
+    background-color: var(--main-color);
+    color: var(--primary-color);
     font-size: 0.7em;
     width: 100%;
     padding: 1em;
