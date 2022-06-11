@@ -7,6 +7,7 @@ module.exports = () => {
         token = localStorage.getItem('token')
     document.querySelector('#iframe').addEventListener('load', () => {
         addItem()
+        updateProduct()
     })
     const newProducts = () => {
         axios.get('http://127.0.0.1:8000/api/v1/admin/products/', {
@@ -141,14 +142,19 @@ module.exports = () => {
 
     const updateProduct = () => {
         const update = document.querySelector('#iframe').contentDocument.querySelector("[update]")
-        update.addEventListener('click', () => {
-            const data = new FormData
-            data.append('image', productImgDsiplay.src)
-            data.append('product_name', document.querySelector('#iframe').contentDocument.querySelector('#name').value)
-            data.append('price', document.querySelector('#iframe').contentDocument.querySelector('#price').value)
-            data.append('inventory', document.querySelector('#iframe').contentDocument.querySelector('#inventory').value)
-            data.append('category', document.querySelector('#iframe').contentDocument.querySelector('#product-category').value)
-            axios.post('http://127.0.0.1:8000/api/v1/admin/products/add', data, {
+        const addProductForm = document.querySelector('#iframe').contentDocument.querySelector('#add-product-form')
+        const productImgDsiplay = document.querySelector('#iframe').contentDocument.querySelector('#productImgDsiplay')
+        const submit = document.querySelector('#iframe').contentDocument.querySelector("input[type='submit']")
+        update.addEventListener('click', (e) => {
+            let id = `.U${ e.target.id }`
+            const btn = document.querySelector('#iframe').contentDocument.querySelector(id)
+            axios.patch(`http://127.0.0.1:8000/api/v1/admin/products/update/${ e.target.id }`, {
+                'image': productImgDsiplay.src,
+                'product_name': document.querySelector('#iframe').contentDocument.querySelector('#name').value,
+                'price': document.querySelector('#iframe').contentDocument.querySelector('#price').value,
+                'inventory': document.querySelector('#iframe').contentDocument.querySelector('#inventory').value,
+                'category': document.querySelector('#iframe').contentDocument.querySelector('#product-category').value
+            }, {
                 headers: {
                     Authorization: `Bearer ${ token }`,
                 }
@@ -160,6 +166,10 @@ module.exports = () => {
                     document.querySelector('#iframe').contentDocument.querySelector('#inventory').value = ""
                     document.querySelector('#iframe').contentDocument.querySelector('#product-category').value = ""
                     productImgDsiplay.src = "../assets/blank-profile.webp"
+                    addProductForm.style.maxHeight = `0px`
+                    btn.classList.toggle('clicked')
+                    submit.classList.toggle('d-none')
+                    update.classList.toggle('d-none')
                 }).catch((err) => {
                     console.log(err)
                 });
