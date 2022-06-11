@@ -250,6 +250,8 @@ nav a:hover,
 
 i {
     float: right;
+    transform: scale(1.5);
+    cursor: pointer;
 }
 
 .header {

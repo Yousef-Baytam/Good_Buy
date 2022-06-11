@@ -78,8 +78,12 @@ const getFavourites = async () => {
 
 const productCardGenerator = async (arr) => {
     container.innerHTML = ``
+    let favouritesIds = []
+    for (let i of favourites) {
+        favouritesIds.push(i.id)
+    }
     for (let prod of arr) {
-        let card = productCard(prod.product_name, prod.price, prod.inventory_id == 1 ? 'In Stock' : 'Out of Stock', prod.category ? prod.category.category : 'N/A', favourites.includes(prod) ? true : false, prod.image, prod.id)
+        let card = productCard(prod.product_name, prod.price, prod.inventory_id == 1 ? 'In Stock' : 'Out of Stock', prod.category ? prod.category.category : 'N/A', favouritesIds.includes(prod.id) ? true : false, prod.image, prod.id)
         container.insertAdjacentHTML('beforeend', card)
     }
 }
@@ -107,4 +111,19 @@ const favouriteProduct = async (id, fav) => {
             }).catch((err) => {
                 console.log(err)
             })
+}
+
+const listenToFavourites = (heart) => {
+    heart.addEventListener('click', async (e) => {
+        if (e.target.classList.contains('fa-regular')) {
+            await favouriteProduct(e.target.id, true)
+            e.target.classList.toggle('fa-regular')
+            e.target.classList.toggle('fa-solid')
+        }
+        else {
+            await favouriteProduct(e.target.id, false)
+            e.target.classList.toggle('fa-regular')
+            e.target.classList.toggle('fa-solid')
+        }
+    })
 }
