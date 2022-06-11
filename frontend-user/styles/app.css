@@ -14,39 +14,38 @@ body {
 
 form {
     display: flex;
-    flex-direction: column;
-    width: 350px;
+    flex-direction: row;
+    width: 700px;
     height: 300px;
     align-content: center;
     justify-content: space-around;
     margin: 20px;
+    flex-wrap: wrap;
 }
 
 form div {
     display: flex;
+    width: 50%;
     flex-direction: column;
     justify-content: center;
 }
 
-input,
-select {
+input {
     outline: 0;
     border: 1px solid rgba(128, 128, 128, 0.356);
     height: 2em;
     padding: 10px;
     border-radius: 5px;
-    width: 100%;
+    width: 92%;
     align-self: center;
 }
 
-.password-label {
-    margin-top: 1em;
-}
+
 
 input[type='submit'] {
     width: 50%;
     height: 3em;
-    margin-top: 3em;
+    margin-top: 2em;
     cursor: pointer;
     transition: all 200ms ease;
 }
@@ -74,6 +73,7 @@ input[type='submit']:active {
 
 [last] {
     text-align: center;
+    width: 100%;
 }
 
 span {
