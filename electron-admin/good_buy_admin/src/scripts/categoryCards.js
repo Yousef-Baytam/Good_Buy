@@ -10,6 +10,7 @@ module.exports = () => {
         if (document.querySelector('iframe').attributes.src.textContent.includes('categories.html')) {
             addCat()
             addCatBtn()
+            updateCategory()
         }
     })
 
@@ -80,60 +81,48 @@ module.exports = () => {
     const edit = (x) => {
         let id = `.U${ x }`
         const btn = document.querySelector('#iframe').contentDocument.querySelector(id)
-        const addProductForm = document.querySelector('#iframe').contentDocument.querySelector('#add-category-form')
-        const productImgDsiplay = document.querySelector('#iframe').contentDocument.querySelector('#productImgDsiplay')
+        const addCategoryForm = document.querySelector('#iframe').contentDocument.querySelector('#add-category-form')
         const submit = document.querySelector('#iframe').contentDocument.querySelector("input[type='submit']")
         const update = document.querySelector('#iframe').contentDocument.querySelector("[update]")
 
         btn.addEventListener('click', (e) => {
             e.target.classList.toggle('clicked')
             if (e.target.classList.contains('clicked'))
-                addProductForm.style.maxHeight = `600px`
+                addCategoryForm.style.maxHeight = `200px`
             else
-                addProductForm.style.maxHeight = `0px`
+                addCategoryForm.style.maxHeight = `0px`
             let clicked
-            for (let i of products) {
+            for (let i of categories) {
                 if (i.id == e.target.id)
                     clicked = i
             }
             console.log(clicked)
-            document.querySelector('#iframe').contentDocument.querySelector('#name').value = clicked.product_name
-            document.querySelector('#iframe').contentDocument.querySelector('#price').value = clicked.price
-            document.querySelector('#iframe').contentDocument.querySelector('#inventory').value = clicked.inventory_id == 1 ? 'In Stock' : 'Out of Stock'
-            document.querySelector('#iframe').contentDocument.querySelector('#product-category').value = clicked.category.category
-            productImgDsiplay.src = clicked.image
+            document.querySelector('#iframe').contentDocument.querySelector('#name').value = clicked.category
             submit.classList.toggle('d-none')
             update.classList.toggle('d-none')
             update.id = e.target.id
         })
     }
 
-    const updateProduct = () => {
+    const updateCategory = () => {
         const update = document.querySelector('#iframe').contentDocument.querySelector("[update]")
         const addProductForm = document.querySelector('#iframe').contentDocument.querySelector('#add-category-form')
-        const productImgDsiplay = document.querySelector('#iframe').contentDocument.querySelector('#productImgDsiplay')
         const submit = document.querySelector('#iframe').contentDocument.querySelector("input[type='submit']")
         update.addEventListener('click', (e) => {
             let id = `.U${ e.target.id }`
             const btn = document.querySelector('#iframe').contentDocument.querySelector(id)
-            axios.patch(`http://127.0.0.1:8000/api/v1/admin/products/update/${ e.target.id }`, {
-                'image': productImgDsiplay.src,
-                'product_name': document.querySelector('#iframe').contentDocument.querySelector('#name').value,
-                'price': document.querySelector('#iframe').contentDocument.querySelector('#price').value,
-                'inventory': document.querySelector('#iframe').contentDocument.querySelector('#inventory').value,
-                'category': document.querySelector('#iframe').contentDocument.querySelector('#product-category').value
-            }, {
-                headers: {
-                    Authorization: `Bearer ${ token }`,
-                }
-            })
+            axios.patch(`http://127.0.0.1:8000/api/v1/admin/categories/update/${ e.target.id }`,
+                {
+                    'category': document.querySelector('#iframe').contentDocument.querySelector('#name').value
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${ token }`,
+                    }
+                })
                 .then((res) => {
-                    newProducts()
+                    getCat()
                     document.querySelector('#iframe').contentDocument.querySelector('#name').value = ""
-                    document.querySelector('#iframe').contentDocument.querySelector('#price').value = ""
-                    document.querySelector('#iframe').contentDocument.querySelector('#inventory').value = ""
-                    document.querySelector('#iframe').contentDocument.querySelector('#product-category').value = ""
-                    productImgDsiplay.src = "../assets/blank-profile.webp"
                     addProductForm.style.maxHeight = `0px`
                     btn.classList.toggle('clicked')
                     submit.classList.toggle('d-none')
@@ -172,6 +161,7 @@ module.exports = () => {
             let element = categoryCard(category.category, category.id)
             container.insertAdjacentHTML('beforeend', element)
             ban(category.id)
+            edit(category.id)
         }
     }
 }
