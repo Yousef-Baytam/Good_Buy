@@ -198,7 +198,6 @@ module.exports = () => {
     }
 
     const productCardGenerator = () => {
-        console.log(1)
         let container = document.querySelector('#iframe').contentDocument.querySelector('.subview')
         container.innerHTML = ``
         for (let product of products) {

@@ -6,41 +6,43 @@ module.exports = () => {
     if (localStorage.getItem('token'))
         token = localStorage.getItem('token')
     document.querySelector('#iframe').addEventListener('load', () => {
-
+        addItem()
+        addCatBtn()
     })
 
-    axios.get('http://127.0.0.1:8000/api/v1/admin/categories/', {
-        headers: {
-            Authorization: `Bearer ${ token }`
-        }
-    })
-        .then((res) => {
-            categories = res.data.res
-            categoryCardGenerator()
-        }).catch((err) => {
-            console.log(err)
+    const getCat = () => {
+        axios.get('http://127.0.0.1:8000/api/v1/admin/categories/', {
+            headers: {
+                Authorization: `Bearer ${ token }`
+            }
         })
+            .then((res) => {
+                categories = res.data.res
+                categoryCardGenerator()
+            }).catch((err) => {
+                console.log(err)
+            })
+    }
+    getCat()
 
+    const addCatBtn = () => {
+        const addProductBtn = document.querySelector('#iframe').contentDocument.querySelector('.add-product')
+        const addProductForm = document.querySelector('#iframe').contentDocument.querySelector('#add-product-form')
+        addProductBtn.addEventListener('click', (e) => {
+            e.target.classList.toggle('active')
+            if (e.target.classList.contains('active'))
+                addProductForm.style.maxHeight = `200px`
+            else
+                addProductForm.style.maxHeight = `0px`
+        })
+    }
     const addItem = () => {
         const data = new FormData
         const addProductForm = document.querySelector('#iframe').contentDocument.querySelector('#add-product-form')
-        const productImg = document.querySelector('#iframe').contentDocument.querySelector('#productImg')
-        const productImgDsiplay = document.querySelector('#iframe').contentDocument.querySelector('#productImgDsiplay')
-        productImg.addEventListener('change', (e) => {
-            let reader = new FileReader()
-            reader.readAsDataURL(e.target.files[0])
-            reader.addEventListener('loadend', () => {
-                productImgDsiplay.src = reader.result
-            })
-        })
         addProductForm.addEventListener('submit', (e) => {
             e.preventDefault()
-            data.append('image', productImgDsiplay.src)
-            data.append('product_name', document.querySelector('#iframe').contentDocument.querySelector('#name').value)
-            data.append('price', document.querySelector('#iframe').contentDocument.querySelector('#price').value)
-            data.append('inventory', document.querySelector('#iframe').contentDocument.querySelector('#inventory').value)
-            data.append('category', document.querySelector('#iframe').contentDocument.querySelector('#product-category').value)
-            axios.post('http://127.0.0.1:8000/api/v1/admin/products/add', data, {
+            data.append('category_name', document.querySelector('#iframe').contentDocument.querySelector('#name').value)
+            axios.post('http://127.0.0.1:8000/api/v1/admin/categories/add', data, {
                 headers: {
                     Authorization: `Bearer ${ token }`,
                 }
@@ -48,10 +50,6 @@ module.exports = () => {
                 .then((res) => {
                     newProducts()
                     document.querySelector('#iframe').contentDocument.querySelector('#name').value = ""
-                    document.querySelector('#iframe').contentDocument.querySelector('#price').value = ""
-                    document.querySelector('#iframe').contentDocument.querySelector('#inventory').value = ""
-                    document.querySelector('#iframe').contentDocument.querySelector('#product-category').value = ""
-                    productImgDsiplay.src = "../assets/blank-profile.webp"
                 }).catch((err) => {
                     console.log(err)
                 });
@@ -164,7 +162,6 @@ module.exports = () => {
     }
 
     const categoryCardGenerator = () => {
-        console.log(1)
         let container = document.querySelector('#iframe').contentDocument.querySelector('.subview')
         container.innerHTML = ``
         for (let category of categories) {
