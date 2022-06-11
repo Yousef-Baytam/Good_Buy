@@ -6,7 +6,6 @@ let favourites
 
 if (localStorage.getItem('token')) {
     token = localStorage.getItem('token')
-    console.log(token)
     let data = new FormData()
     axios.post('http://127.0.0.1:8000/api/me', data, {
         headers: {
@@ -30,7 +29,6 @@ const newProducts = async () => {
         .then(async (res) => {
             products = res.data.res
             await getFavourites()
-            console.log(products)
             productCardGenerator(products)
         }).catch((err) => {
             console.log(err)
@@ -39,7 +37,6 @@ const newProducts = async () => {
 
 newProducts()
 const productCard = (name, price, inv, cat, fav, img, id) => {
-    console.log(img)
     return `<div class="product-card-container">
                 <div class="product-card">
                     <div class="product-image">
@@ -71,9 +68,7 @@ const getFavourites = async () => {
         }
     })
         .then((res) => {
-            console.log(res)
             favourites = res.data.res
-            console.log(favourites)
         }).catch((err) => {
             console.log(err)
         })
@@ -87,4 +82,29 @@ const productCardGenerator = async (arr) => {
         let card = productCard(prod.product_name, prod.price, prod.inventory_id == 1 ? 'In Stock' : 'Out of Stock', prod.category ? prod.category.category : 'N/A', favourites.includes(prod) ? true : false, prod.image, prod.id)
         container.insertAdjacentHTML('beforeend', card)
     }
+}
+
+const favouriteProduct = async (id, fav) => {
+    if (fav)
+        await axios.post(`http://127.0.0.1:8000/api/v1/user/products/favourite/add/${ id }`, {
+            headers: {
+                Authorization: `Bearer ${ token }`
+            }
+        })
+            .then((res) => {
+                console.log(res)
+            }).catch((err) => {
+                console.log(err)
+            })
+    else
+        await axios.post(`http://127.0.0.1:8000/api/v1/user/products/favourite/remove/${ id }`, {
+            headers: {
+                Authorization: `Bearer ${ token }`
+            }
+        })
+            .then((res) => {
+                console.log(res)
+            }).catch((err) => {
+                console.log(err)
+            })
 }
