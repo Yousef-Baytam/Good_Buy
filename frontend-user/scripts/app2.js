@@ -5,21 +5,25 @@ let user
 let favourites
 let cities
 
-if (localStorage.getItem('token')) {
-    token = localStorage.getItem('token')
-    let data = new FormData()
-    axios.post('http://127.0.0.1:8000/api/me', data, {
-        headers: {
-            Authorization: `Bearer ${ token }`
-        }
-    })
-        .then((res) => {
-            if (res.data.id) {
-                user = res.data
+const loggedInUser = async () => {
+    if (localStorage.getItem('token')) {
+        token = localStorage.getItem('token')
+        let data = new FormData()
+        await axios.post('http://127.0.0.1:8000/api/me', data, {
+            headers: {
+                Authorization: `Bearer ${ token }`
             }
         })
-        .catch((err) => window.location.href = '../')
+            .then((res) => {
+                if (res.data.id) {
+                    user = res.data
+                }
+            })
+            .catch((err) => window.location.href = '../')
+    }
 }
+if (window.location.href.includes('products.html'))
+    loggedInUser()
 
 const logout = () => {
     localStorage.removeItem('token')
@@ -84,7 +88,8 @@ const getCities = async () => {
             console.log(err)
         })
 }
-getCities()
+if (window.location.href.includes('products.html'))
+    getCities()
 
 const getFavourites = async () => {
     await axios.get('http://127.0.0.1:8000/api/v1/user/products/favourite/all', {
@@ -97,7 +102,6 @@ const getFavourites = async () => {
         }).catch((err) => {
             console.log(err)
         })
-
 }
 
 
@@ -150,3 +154,18 @@ const listenToFavourites = (heart) => {
         }
     })
 }
+
+const search = () => {
+    const searchBar = document.querySelector('[placeholder="Search"]')
+    console.log(searchBar)
+    if (searchBar)
+        searchBar.addEventListener('keyup', () => {
+            let result = []
+            for (let i of products) {
+                if (i.product_name.toLowerCase().includes(searchBar.value))
+                    result.push(i)
+            }
+            productCardGenerator(result)
+        })
+}
+search()

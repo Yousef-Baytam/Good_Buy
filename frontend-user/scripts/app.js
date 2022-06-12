@@ -49,8 +49,38 @@ register.addEventListener('submit', async (e) => {
         .then((res) => {
             if (res.data) {
                 localStorage.setItem('token', res.data.authorisation.token)
-                window.location.href = './products.html'
+                window.location.href = './views/products.html'
             }
         })
         .catch((err) => console.log(err))
+})
+
+const registerSpan = document.querySelector('[register-span]')
+const backSpan = document.querySelector('[back-span]')
+const loginContainer = document.querySelector('[loginContainer]')
+const registerContainer = document.querySelector('[registerContainer]')
+
+registerSpan.addEventListener('click', () => {
+    loginContainer.classList.add('animate-rev')
+    loginContainer.addEventListener('animationend', () => {
+        loginContainer.classList.add('d-none')
+        registerContainer.classList.remove('d-none')
+        registerContainer.classList.add('animate')
+        registerContainer.addEventListener('animationend', () => {
+            registerContainer.classList.remove('animate')
+            loginContainer.classList.remove('animate-rev')
+        }, { once: true })
+    }, { once: true })
+})
+backSpan.addEventListener('click', () => {
+    registerContainer.classList.add('animate-rev')
+    registerContainer.addEventListener('animationend', () => {
+        registerContainer.classList.add('d-none')
+        loginContainer.classList.remove('d-none')
+        loginContainer.classList.add('animate')
+        loginContainer.addEventListener('animationend', () => {
+            registerContainer.classList.remove('animate-rev')
+            loginContainer.classList.remove('animate')
+        }, { once: true })
+    }, { once: true })
 })
