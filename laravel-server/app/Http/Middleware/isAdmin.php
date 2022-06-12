@@ -21,6 +21,6 @@ class isAdmin
         $user = User::find(Auth::user()->id);
         if ($user->users_type_id == 2)
             return $next($request);
-        return dd('fuck you');
+        return dd('Dont mess around bro! (Charbel, 2022)');
     }
 }
