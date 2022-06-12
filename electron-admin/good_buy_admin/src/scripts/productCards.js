@@ -9,6 +9,7 @@ module.exports = () => {
         if (document.querySelector('iframe').attributes.src.textContent.includes('products')) {
             addItem()
             updateProduct()
+            search()
         }
     }, { once: true })
     const newProducts = () => {
@@ -19,7 +20,7 @@ module.exports = () => {
         })
             .then((res) => {
                 products = res.data.res
-                productCardGenerator()
+                productCardGenerator(products)
             }).catch((err) => {
                 console.log(err)
             })
@@ -199,14 +200,28 @@ module.exports = () => {
         })
     }
 
-    const productCardGenerator = () => {
+    const productCardGenerator = (arr) => {
         let container = document.querySelector('#iframe').contentDocument.querySelector('.subview')
         container.innerHTML = ``
-        for (let product of products) {
+        for (let product of arr) {
             let element = productCard(product.product_name, product.price, product.image, product.inventory_id == 1 ? 'In Stock' : 'Out of Stock', product.id, product.category ? product.category.category : 'deleted')
             container.insertAdjacentHTML('beforeend', element)
             ban(product.id)
             edit(product.id)
         }
+    }
+
+    const search = () => {
+        const searchBar = document.querySelector('#iframe').contentDocument.querySelector('[placeholder="Search"]')
+        console.log(searchBar)
+        if (searchBar)
+            searchBar.addEventListener('keyup', () => {
+                let result = []
+                for (let i of products) {
+                    if (i.product_name.toLowerCase().includes(searchBar.value))
+                        result.push(i)
+                }
+                productCardGenerator(result)
+            })
     }
 }

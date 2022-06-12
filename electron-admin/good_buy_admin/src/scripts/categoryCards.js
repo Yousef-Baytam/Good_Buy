@@ -11,6 +11,7 @@ module.exports = () => {
             addCat()
             addCatBtn()
             updateCategory()
+            search()
         }
     }, { once: true })
 
@@ -22,7 +23,7 @@ module.exports = () => {
         })
             .then((res) => {
                 categories = res.data.res
-                categoryCardGenerator()
+                categoryCardGenerator(categories)
             }).catch((err) => {
                 console.log(err)
             })
@@ -154,14 +155,28 @@ module.exports = () => {
         })
     }
 
-    const categoryCardGenerator = () => {
+    const categoryCardGenerator = (arr) => {
         let container = document.querySelector('#iframe').contentDocument.querySelector('.subview')
         container.innerHTML = ``
-        for (let category of categories) {
+        for (let category of arr) {
             let element = categoryCard(category.category, category.id)
             container.insertAdjacentHTML('beforeend', element)
             ban(category.id)
             edit(category.id)
         }
+    }
+
+    const search = () => {
+        const searchBar = document.querySelector('#iframe').contentDocument.querySelector('[placeholder="Search"]')
+        console.log(searchBar)
+        if (searchBar)
+            searchBar.addEventListener('keyup', () => {
+                let result = []
+                for (let i of categories) {
+                    if (i.category.toLowerCase().includes(searchBar.value))
+                        result.push(i)
+                }
+                categoryCardGenerator(result)
+            })
     }
 }
