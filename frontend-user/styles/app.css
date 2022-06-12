@@ -367,8 +367,17 @@ h1 {
     width: 10%;
 }
 
+[registerContainer],
+[loginContainer] {
+    transition: all 200ms ease;
+}
+
 .animate {
-    animation: 200ms scale forwards reverse ease;
+    animation: 150ms scale forwards reverse ease;
+}
+
+.animate-rev {
+    animation: 150ms scale forwards ease;
 }
 
 @keyframes scale {
