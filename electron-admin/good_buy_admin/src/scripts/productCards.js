@@ -10,7 +10,7 @@ module.exports = () => {
             addItem()
             updateProduct()
         }
-    })
+    }, { once: true })
     const newProducts = () => {
         axios.get('http://127.0.0.1:8000/api/v1/admin/products/', {
             headers: {
