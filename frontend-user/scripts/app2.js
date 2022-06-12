@@ -102,7 +102,6 @@ const getFavourites = async () => {
         }).catch((err) => {
             console.log(err)
         })
-
 }
 
 
@@ -155,3 +154,18 @@ const listenToFavourites = (heart) => {
         }
     })
 }
+
+const search = () => {
+    const searchBar = document.querySelector('[placeholder="Search"]')
+    console.log(searchBar)
+    if (searchBar)
+        searchBar.addEventListener('keyup', () => {
+            let result = []
+            for (let i of products) {
+                if (i.product_name.toLowerCase().includes(searchBar.value))
+                    result.push(i)
+            }
+            productCardGenerator(result)
+        })
+}
+search()

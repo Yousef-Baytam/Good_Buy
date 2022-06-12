@@ -224,8 +224,9 @@ nav a:hover,
 
 .container {
     padding: 1em;
+    width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: center !important;
     flex-wrap: wrap;
 }
 
