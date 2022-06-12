@@ -66,7 +66,7 @@ input[type='submit']:active {
 }
 
 .form-container {
-    background-color: rgb(223, 223, 223);
+    background-image: linear-gradient(to left, rgba(255, 255, 255, 0), rgb(255, 255, 255), rgba(255, 255, 255, 0));
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -358,6 +358,16 @@ button:hover {
 
 h1 {
     margin-top: 0.1em;
+    color: rgb(0, 0, 0);
+}
+
+[title] {
+    color: white;
+}
+
+h5 {
+    color: white;
+    font-weight: 400;
 }
 
 [back] {
@@ -371,6 +381,15 @@ h1 {
 [registerContainer],
 [loginContainer] {
     transition: all 200ms ease;
+}
+
+[main] {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../assets/cropped-image-woman-inputting-card-information-key-phone-laptop-while-shopping-online.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .RIPBOZO {
