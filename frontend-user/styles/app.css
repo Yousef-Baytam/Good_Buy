@@ -373,6 +373,14 @@ h1 {
     transition: all 200ms ease;
 }
 
+.RIPBOZO {
+    width: 100%;
+    text-align: center;
+    color: red;
+    font-size: 15px;
+    font-weight: bold;
+}
+
 .animate {
     animation: 150ms scale forwards reverse ease;
 }

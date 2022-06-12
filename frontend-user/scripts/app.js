@@ -10,7 +10,7 @@ if (localStorage.getItem('token')) {
         }
     })
         .then((res) => {
-            if (res.data.id) {
+            if (res.data.status == 'active') {
                 window.location.href = './views/products.html'
             }
         })
@@ -30,7 +30,12 @@ login.addEventListener('submit', async (e) => {
                 localStorage.setItem('token', res.data.authorisation.token)
                 if (res.data.user.status == 'active')
                     window.location.href = './views/products.html'
+                else {
+                    if (document.querySelector('.RIPBOZO').classList.contains('d-none'))
+                        document.querySelector('.RIPBOZO').classList.remove('d-none')
+                }
             }
+
         })
         .catch((err) => console.log(err))
 })

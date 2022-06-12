@@ -18,6 +18,9 @@ const loggedInUser = async () => {
                 if (res.data.id) {
                     user = res.data
                 }
+                if (res.data.status != 'active') {
+                    window.location.href = '../'
+                }
             })
             .catch((err) => window.location.href = '../')
     }
